@@ -4,10 +4,10 @@
 
 [![Coverage 20%](https://img.shields.io/badge/coverage-20%25-red.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
 [![Coverage 40%](https://img.shields.io/badge/coverage-40%25-orange.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
-[![Coverage 60%](https://img.shields.io/badge/coverage-40%25-yellow.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
-[![Coverage 80%](https://img.shields.io/badge/coverage-40%25-yellowgreen.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
-[![Coverage 90%](https://img.shields.io/badge/coverage-40%25-green.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
-[![Coverage 100%](https://img.shields.io/badge/coverage-40%25-brightgreen.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
+[![Coverage 60%](https://img.shields.io/badge/coverage-60%25-yellow.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
+[![Coverage 80%](https://img.shields.io/badge/coverage-80%25-yellowgreen.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
+[![Coverage 90%](https://img.shields.io/badge/coverage-90%25-green.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
+[![Coverage 100%](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
 
 
 ## Usage

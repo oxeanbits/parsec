@@ -40,6 +40,7 @@ module SimpleCov
 
         return unless (github_user and github_mail and github_org and github_repo and github_token)
 
+        %x(mv badge.svg ../)
         %x(git remote remove upstream)
         %x(git remote add upstream 'https://#{github_token}@github.com/#{github_org}/#{github_repo}.git' > /dev/null 2> /dev/null)
         %x(git config --global user.name #{github_user})
@@ -47,6 +48,7 @@ module SimpleCov
         %x(git fetch upstream)
         %x(git checkout gh-pages -f)
         %x(git reset -- .)
+        %x(mv ../badge.svg .)
         %x(git add badge.svg)
         %x(git commit -a -m 'CI: Coverage for $COMMIT_ID')
         %x(git push upstream gh-pages:gh-pages)

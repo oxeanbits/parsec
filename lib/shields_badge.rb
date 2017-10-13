@@ -47,7 +47,6 @@ module SimpleCov
         %x(git fetch upstream)
         %x(git checkout gh-pages -f)
         %x(git reset -- .)
-        %x(curl #{shields_url} > badge.svg)
         %x(git add badge.svg)
         %x(git commit -a -m 'CI: Coverage for $COMMIT_ID')
         %x(git push upstream gh-pages:gh-pages)

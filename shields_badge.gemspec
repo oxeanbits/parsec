@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.email              = ["nilton.vasques@gmail.com"]
   s.description        = %q{Shields Badget Simplecov Formatter}
   s.homepage           = %q{https://github.com/niltonvasques/simplecov-shields-badge}
-  s.summary            = %q{Shields Badget Simplecov Formatter}
+  s.summary            = %q{A gem to generate a badge from simplecov coverage result, using shields.io platform and publish the badge to gh-pages}
   s.files              = ["lib/shields_badge.rb"]
   s.test_files         = ["test/test_shields_badge.rb"]
   s.require_paths      = ["lib"]

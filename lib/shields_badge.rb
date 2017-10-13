@@ -2,26 +2,36 @@ module SimpleCov
   module Formatter
     class ShieldsBadge
       VERSION = "0.1.0"
+
       def format(result)
         coverage = result.covered_percent
-        color = case coverage
-                when 0..20 then :red
-                when 20..40 then :orange
-                when 40..60 then :yellow
-                when 60..80 then :yellowgreen
-                when 80..90 then :green
-                else :brightgreen
-                end
-        shields_url = "https://img.shields.io/badge/coverage-#{coverage.round(2)}%25-#{color}.svg"
-        puts shields_url
-        %x(curl #{shields_url} > badge.svg)
-
-        upload_to_gh_pages(params)
+        generate_badge(coverage)
+        upload_to_gh_pages
       end
 
       private
 
-      def upload_to_gh_pages(params)
+      def generate_badge(coverage)
+        %x(curl #{badge_url(coverage)} > badge.svg)
+      end
+
+      def badge_url(coverage)
+        color = coverage_color(coverage)
+        "https://img.shields.io/badge/coverage-#{coverage.round(2)}%25-#{color}.svg"
+      end
+
+      def coverage_color(coverage)
+        case coverage
+        when 0..20 then :red
+        when 20..40 then :orange
+        when 40..60 then :yellow
+        when 60..80 then :yellowgreen
+        when 80..90 then :green
+        else :brightgreen
+        end
+      end
+
+      def upload_to_gh_pages
         github_user  = ENV["GITHUB_USER"]
         github_mail  = ENV["GITHUB_MAIL"]
         github_org   = ENV["GITHUB_ORG"]

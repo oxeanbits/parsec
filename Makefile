@@ -5,7 +5,7 @@ deploy:
 	git tag v$(VERSION) -m ""
 	git push origin v$(VERSION)
 	gem build shields_badge.gemspec
-	gem push shields_badge-$(VERSION).gem
+	gem push simplecov-shields-badge-$(VERSION).gem
 
 install:
 	rm -rf vendor .bundle

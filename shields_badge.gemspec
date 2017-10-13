@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 Gem::Specification.new do |s|
-  s.name               = "shields-badge"
+  s.name               = "simplecov-shields-badge"
   s.version            = "0.1.0"
   s.platform           = Gem::Platform::RUBY
   s.authors            = ["Nilton Vasques"]

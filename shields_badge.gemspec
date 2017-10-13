@@ -14,11 +14,9 @@ Gem::Specification.new do |s|
   s.require_paths      = ["lib"]
   s.license            = "mit"
 
-  s.add_dependency "url"
-  s.add_dependency "json"
-  s.add_dependency "simplecov"
+  s.add_dependency "simplecov", "~> 0.15"
 
-  s.add_development_dependency "mocha"
-  s.add_development_dependency "rake"
-  s.add_development_dependency "minitest"
+  s.add_development_dependency "mocha", "~> 0.3"
+  s.add_development_dependency "rake", "~> 12.1"
+  s.add_development_dependency "minitest", "~> 5.10"
 end

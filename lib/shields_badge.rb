@@ -40,7 +40,8 @@ module SimpleCov
 
         return unless (github_user and github_mail and github_org and github_repo and github_token)
 
-        %x(git remote add upstream 'https://#{github_token}@github.com/#{github_org}/#{github_repo}.git')
+        %x(git remote remove upstream)
+        %x(git remote add upstream 'https://#{github_token}@github.com/#{github_org}/#{github_repo}.git' > /dev/null 2> /dev/null)
         %x(git config --global user.name #{github_user})
         %x(git config --global user.email #{github_mail})
         %x(git fetch upstream)

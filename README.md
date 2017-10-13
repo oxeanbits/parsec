@@ -28,7 +28,7 @@ end
 require 'simplecov'
 SimpleCov.start
 
-require 'codecov'
+require 'shields_badge'
 SimpleCov.formatter = SimpleCov::Formatter::ShieldsBadge
 ```
 

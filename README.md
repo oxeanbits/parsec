@@ -1,5 +1,8 @@
 # simplecov-shields-badge
 [![Build Status](https://travis-ci.org/niltonvasques/simplecov-shields-badge.svg?branch=master)](https://travis-ci.org/niltonvasques/simplecov-shields-badge)
+[![Coverage](https://niltonvasques.github.io/simplecov-shields-badge/badge.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
+
+A simplecov formatter that generates a shields.io badge and uploads to gh-pages
 
 # Examples
 

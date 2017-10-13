@@ -1,4 +1,5 @@
 # simplecov-shields-badge
+[![Build Status](https://travis-ci.org/niltonvasques/simplecov-shields-badge.svg?branch=master)](https://travis-ci.org/niltonvasques/simplecov-shields-badge)
 
 # Examples
 

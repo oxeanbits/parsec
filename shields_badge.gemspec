@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.homepage           = %q{https://github.com/niltonvasques/simplecov-shields-badge}
   s.summary            = %q{Shields Badget Simplecov Formatter}
   s.files              = ["lib/shields_badge.rb"]
-  s.test_files         = ["test/test_codecov.rb"]
+  s.test_files         = ["test/test_shields_badge.rb"]
   s.require_paths      = ["lib"]
 
   s.add_dependency "url"
@@ -19,6 +19,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "mocha"
   s.add_development_dependency "rake"
-  #s.add_development_dependency "rspec"
   s.add_development_dependency "minitest"
 end

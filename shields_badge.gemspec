@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.files              = ["lib/shields_badge.rb"]
   s.test_files         = ["test/test_shields_badge.rb"]
   s.require_paths      = ["lib"]
+  s.license            = "mit"
 
   s.add_dependency "url"
   s.add_dependency "json"

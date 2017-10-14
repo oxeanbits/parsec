@@ -26,6 +26,8 @@ end
 
 > Add to your README.md
 
+     [![Coverage](https://USERNAME.github.io/REPO/badge.svg)](https://github.com/USERNAME/REPO)
+
 > Add to the top of your `tests/helper.rb` file
 
 ```ruby

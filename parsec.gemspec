@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.email              = ["nilton.vasques@gmail.com"]
   s.description        = %q{Parsec}
   s.homepage           = %q{https://github.com/niltonvasques/parsec}
-  s.summary            = %q{A gem to evaluate Ruby written math equations using a simpler version of the muparsex C++ library}
+  s.summary            = %q{A gem to evaluate math equations using a lighter and faster version of the muparsex C++ library}
   s.files              = ["lib/parsec.rb", "lib/string_to_boolean_refinements.rb"]
   s.test_files         = ["test/test_parsec.rb"]
   s.require_paths      = ["lib"]

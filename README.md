@@ -1,50 +1,47 @@
-# simplecov-shields-badge
-[![Build Status](https://travis-ci.org/niltonvasques/simplecov-shields-badge.svg?branch=master)](https://travis-ci.org/niltonvasques/simplecov-shields-badge)
-[![Coverage](https://niltonvasques.github.io/simplecov-shields-badge/badge.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
+# parsec
 
-A simplecov formatter that generates a shields.io badge and uploads to gh-pages
-
-# Examples
-
-[![Coverage 20%](https://img.shields.io/badge/coverage-20%25-red.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
-[![Coverage 40%](https://img.shields.io/badge/coverage-40%25-orange.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
-[![Coverage 60%](https://img.shields.io/badge/coverage-60%25-yellow.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
-[![Coverage 80%](https://img.shields.io/badge/coverage-80%25-yellowgreen.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
-[![Coverage 90%](https://img.shields.io/badge/coverage-90%25-green.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
-[![Coverage 100%](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/niltonvasques/simplecov-shields-badge)
-
+A parser for Math equations using a lighter and faster version of muparserx C++ library
 
 ## Usage
 
 > Add to your `Gemfile`
 
 ```ruby
-group :test do
-  gem 'simplecov-shields-badge', require: false
-end
+gem 'parsec'
 ```
 
-> Add to your README.md
+* Use Ruby version 2.5.1
 
-     [![Coverage](https://USERNAME.github.io/REPO/badge.svg)](https://github.com/USERNAME/REPO)
-
-> Add to the top of your `tests/helper.rb` file
+> Add to the top of your <filename> file
 
 ```ruby
-require 'simplecov'
-SimpleCov.start
-
-require 'shields_badge'
-SimpleCov.formatter = SimpleCov::Formatter::ShieldsBadge
+require 'parsec'
 ```
 
-> In your CI Environment Variables
+> You can then eval equations in your code
 
-```sh
-GITHUB_USER="a github username"
-GITHUB_MAIL="github user email"
-GITHUB_ORG="github organization or username"
-GITHUB_REPO="github repo name"
-GITHUB_ACCESS_TOKEN="github access token with commit permission"
+```ruby
+eval('5 + 1')
+eval('(3 + 3) * (5 * 2)')
 ```
 
+> You can also validate the formula syntax
+
+```ruby
+validate_syntax('3>=2 ? 1 : 0') # correct syntax, returns true
+```
+
+```ruby
+validate_syntax('3>=2 ? 1') # bad syntax, returns StandarError with the message 'Wrong formula syntax'
+```
+
+> Here are examples of equations which are accepted by the parser
+...
+
+> The following Math functions can be used
+
+* Standard functions abs, sin, cos, tan, sinh, cosh, tanh, ln, log, log10, exp, sqrt
+* Unlimited number of arguments: min, max, sum
+* String functions: str2number, length, toupper
+* Complex functions: real, imag, conj, arg, norm
+* Array functions: sizeof, eye, ones, zeros

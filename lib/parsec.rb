@@ -4,6 +4,8 @@ module EquationsParser
   class Parsec
     using StringToBooleanRefinements
 
+    VERSION = '0.1.0'
+
     def eval_equation(equation)
       # This line removes all spaces that are not between quotation marks
       # https://stackoverflow.com/questions/205521/using-regex-to-replace-all-spaces-not-in-quotes-in-ruby?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
@@ -18,7 +20,7 @@ module EquationsParser
 
     def validate_syntax(equation)
       # Regex that validates if the equation represents the syntax expected by murparsex
-      # THE REGEX IS INCOMPLETE!
+      # THIS REGEX IS INCOMPLETE!
       regex_syntax = %r{^\s*-?\d+(?:\s*[-+*/^]\s*\d+)+$}
       raise StandardError, 'Wrong formula syntax' unless equation =~ regex_syntax
       true

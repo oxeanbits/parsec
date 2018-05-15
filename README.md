@@ -21,18 +21,21 @@ require 'parsec'
 > You can then eval equations in your code
 
 ```ruby
-eval('5 + 1')
-eval('(3 + 3) * (5 * 2)')
+parser = EquationsParser::Parsec.new
+parser.eval_equation('5 + 1')
+parser.eval_equation('(3 + 3) * (5 * 2)')
 ```
 
 > You can also validate the formula syntax
 
 ```ruby
-validate_syntax('3>=2 ? 1 : 0') # correct syntax, returns true
+parser = EquationsParser::Parsec.new
+parser.validate_syntax('3>=2 ? 1 : 0') # correct syntax, returns true
 ```
 
 ```ruby
-validate_syntax('3>=2 ? 1') # bad syntax, returns StandarError with the message 'Wrong formula syntax'
+parser = EquationsParser::Parsec.new
+parser.validate_syntax('3>=2 ? 1') # bad syntax, returns StandarError with the message 'Wrong formula syntax'
 ```
 
 > Here are examples of equations which are accepted by the parser

@@ -18,14 +18,6 @@ module EquationsParser
       convert(result_value, result_type)
     end
 
-    def validate_syntax(equation)
-      # Regex that validates if the equation represents the syntax expected by murparsex
-      # THIS REGEX IS INCOMPLETE!
-      regex_syntax = %r{^\s*-?\d+(?:\s*[-+*/^]\s*\d+)+$}
-      raise StandardError, 'Wrong formula syntax' unless equation =~ regex_syntax
-      true
-    end
-
     private
 
     def convert(value, type)

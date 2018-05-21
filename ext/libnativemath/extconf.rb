@@ -1,10 +1,17 @@
 # ext/extconf.rb
 require 'mkmf'
 
+# During gem install step, the path is different
+if File.exists?("parsec.gemspec")
+  BASEDIR = '.'
+else
+  BASEDIR = '../..'
+end
+
 LIBDIR     = RbConfig::CONFIG['libdir']
 INCLUDEDIR = RbConfig::CONFIG['includedir']
-MUPARSER_HEADERS = '../../ext/equations-parser/parser'
-MUPARSER_LIB = '../../ext/equations-parser'
+MUPARSER_HEADERS = "#{BASEDIR}/ext/equations-parser/parser"
+MUPARSER_LIB = "#{BASEDIR}/ext/equations-parser"
 
 HEADER_DIRS = [INCLUDEDIR, MUPARSER_HEADERS]
 
@@ -19,28 +26,33 @@ libs = ['-lmuparserx']
 
 dir_config('libnativemath', HEADER_DIRS, LIB_DIRS)
 
+unless find_executable('swig')
+  abort 'swig is missing. Please install it.'
+end
+
+unless File.exists?("#{MUPARSER_HEADERS}/mpParser.h")
+  abort 'mpParser.h header is missing.'
+end
+
 # iterate though the libs array, and append them to the $LOCAL_LIBS array used for the makefile creation
 libs.each do |lib|
   $LOCAL_LIBS << "#{lib} "
 end
 
-system("pwd")
-Dir.chdir("../../") do
-  system("pwd")
+Dir.chdir(BASEDIR) do
   system("git submodule update --init --recursive")
   Dir.chdir("ext/equations-parser/") do
-    system("pwd")
     system("cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release")
     system("make")
   end
 
   Dir.chdir("ext/libnativemath/") do
-    system("pwd")
     system("swig -c++ -ruby libnativemath.i")
-    #ruby "extconf.rb"
-    #sh "make"
   end
 end
-system("pwd")
+
+unless File.exists?("#{MUPARSER_LIB}/libmuparserx.a")
+  abort 'libmuparserx.a is missing.'
+end
 
 create_makefile('ext/libnativemath/libnativemath')

@@ -20,6 +20,7 @@ extern std::string native_direct_eval(std::string input);
       case 'f': rb_hash_aset($result, rb_str_new2("type"), rb_str_new2("float")); break;
       case 'm': rb_hash_aset($result, rb_str_new2("type"), rb_str_new2("matrix")); break;
       case 's': rb_hash_aset($result, rb_str_new2("type"), rb_str_new2("string")); break;
+      case 'b': rb_hash_aset($result, rb_str_new2("type"), rb_str_new2("boolean")); break;
     }
   } else {
     $result = Qfalse;

@@ -24,12 +24,12 @@ libs.each do |lib|
   $LOCAL_LIBS << "#{lib} "
 end
 
-Dir.chdir("ext/equations-parser/") do
+Dir.chdir("../equations-parser/") do
   system("cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release")
   system("make")
 end
 
-Dir.chdir("ext/libnativemath/") do
+Dir.chdir(".") do
   system("swig -c++ -ruby libnativemath.i")
   #ruby "extconf.rb"
   #sh "make"

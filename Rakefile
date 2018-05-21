@@ -10,13 +10,13 @@ CLOBBER.include('lib/*{.so,.bundle}')
 
 desc 'Build the libnativemath C extension'
 task :build_ext do
-  Dir.chdir("ext/equations-parser/") do
-    sh "cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release"
-    sh "make"
-  end
+  #Dir.chdir("ext/equations-parser/") do
+  #  sh "cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release"
+  #  sh "make"
+  #end
 
   Dir.chdir("ext/libnativemath/") do
-    sh "swig -c++ -ruby libnativemath.i"
+    #sh "swig -c++ -ruby libnativemath.i"
     ruby "extconf.rb"
     sh "make"
   end

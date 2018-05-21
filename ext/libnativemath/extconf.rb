@@ -1,9 +1,11 @@
 # ext/extconf.rb
 require 'mkmf'
+require "bundler/gem_tasks"
+
 LIBDIR     = RbConfig::CONFIG['libdir']
 INCLUDEDIR = RbConfig::CONFIG['includedir']
-MUPARSER_HEADERS = '../equations-parser/parser'
-MUPARSER_LIB = '../equations-parser'
+MUPARSER_HEADERS = 'ext/equations-parser/parser'
+MUPARSER_LIB = 'ext/equations-parser'
 
 HEADER_DIRS = [INCLUDEDIR, MUPARSER_HEADERS]
 
@@ -23,4 +25,15 @@ libs.each do |lib|
   $LOCAL_LIBS << "#{lib} "
 end
 
-create_makefile('libnativemath')
+Dir.chdir("ext/equations-parser/") do
+  sh "cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release"
+  sh "make"
+end
+
+Dir.chdir("ext/libnativemath/") do
+  sh "swig -c++ -ruby libnativemath.i"
+  #ruby "extconf.rb"
+  #sh "make"
+end
+
+create_makefile('ext/libnativemath/libnativemath')

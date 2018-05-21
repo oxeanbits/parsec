@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary            = %q{A gem to evaluate math equations using a lighter and faster version of the muparserx C++ library}
   s.files              = ["lib/parsec.rb", "lib/string_to_boolean_refinements.rb"]
   s.test_files         = ["test/test_parsec.rb"]
-  s.require_paths      = ["lib", "ext/libnativemath"]
+  s.require_paths      = ["lib", "ext/libnativemath", "."]
   s.license            = "mit"
 
   s.add_development_dependency "rake", "~> 12.1"

@@ -8,12 +8,10 @@
 using namespace std;
 using namespace mup;
 
-double duplicate(const double a)
-{
-  return a * 2.0;
-}
-
 Value Calc(string input) {
+  cout << "#####################" << endl;
+  cout << input << endl;
+  cout << "#####################" << endl;
   ParserX  parser(pckALL_NON_COMPLEX);
 
   Value ans;
@@ -51,17 +49,7 @@ Value Calc(string input) {
     return ans;
 } // Calc
 
-
-double calculate_hypot(const double a, const double b)
+std::string native_eval(std::string input)
 {
-  cout << Calc("300 * 500") << endl;
-  double h = hypot(a, b);
-  return duplicate(h);
+  return Calc(input).AsString();
 }
-
-//int main() {
-//
-//  cout << calculate_hypot(16, 4) << endl;
-//
-//  return 0;
-//}

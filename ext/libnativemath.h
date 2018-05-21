@@ -1,2 +1,2 @@
 /* ext/libnativemath.h */
-double calculate_hypot(const double a, const double b);
+std::string native_eval(std::string input);

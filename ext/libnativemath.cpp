@@ -46,21 +46,25 @@ Value Calc(string input) {
     return ans;
 } // Calc
 
-std::string native_eval(std::string input)
+std::string native_direct_eval(std::string input)
 {
   Value ans = Calc(input);
-  cout << "TYPE: " << ans.GetType() << endl;
   return ans.AsString();
 }
 
-/* libpayroll.c */
-int calculate_income_tax(string input, double *tax, char *value_type) {
-  double amount = 200;
+int native_eval(string input, char *value, char *value_type) {
+  Value ans = Calc(input);
 
-  value_type[0] = 'i';
+  value_type[0] = ans.GetType();
   value_type[1] = '\0';
 
-  *tax = 0.25 * amount;
+  //cout << "####################" << endl;
+  //cout << ans << endl;
+  //cout << ans.AsString() << endl;
+  //cout << ans.AsciiDump() << endl;
+  //cout << "####################" << endl;
+
+  strcpy(value, ans.AsString().c_str());
 
   return 0;
 }

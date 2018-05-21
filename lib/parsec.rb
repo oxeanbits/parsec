@@ -5,7 +5,7 @@ module EquationsParser
   class Parsec
     using StringToBooleanRefinements
 
-    VERSION = '0.2.2'
+    VERSION = '0.2.3'
 
     def self.eval_equation(equation)
       # This line removes all spaces that are not between quotation marks

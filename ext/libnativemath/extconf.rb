@@ -1,8 +1,5 @@
 # ext/extconf.rb
 require 'mkmf'
-require "bundler/gem_tasks"
-
-Bundler::GemHelper.install_tasks :name => "parsec"
 
 LIBDIR     = RbConfig::CONFIG['libdir']
 INCLUDEDIR = RbConfig::CONFIG['includedir']
@@ -28,12 +25,12 @@ libs.each do |lib|
 end
 
 Dir.chdir("ext/equations-parser/") do
-  sh "cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release"
-  sh "make"
+  system("cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release")
+  system("make")
 end
 
 Dir.chdir("ext/libnativemath/") do
-  sh "swig -c++ -ruby libnativemath.i"
+  system("swig -c++ -ruby libnativemath.i")
   #ruby "extconf.rb"
   #sh "make"
 end

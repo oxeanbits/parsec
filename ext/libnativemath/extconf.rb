@@ -42,10 +42,6 @@ end
 Dir.chdir(BASEDIR) do
   system("git submodule update --init --recursive")
 
-  unless File.exists?("#{MUPARSER_HEADERS}/mpParser.h")
-    abort 'mpParser.h header is missing.'
-  end
-
   Dir.chdir("ext/equations-parser/") do
     system("cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release")
     system("make")
@@ -54,6 +50,10 @@ Dir.chdir(BASEDIR) do
   Dir.chdir("ext/libnativemath/") do
     system("swig -c++ -ruby libnativemath.i")
   end
+end
+
+unless File.exists?("#{MUPARSER_HEADERS}/mpParser.h")
+  abort 'mpParser.h header is missing.'
 end
 
 unless File.exists?("#{MUPARSER_LIB}/libmuparserx.a")

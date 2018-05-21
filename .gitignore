@@ -47,3 +47,4 @@ ext/libnativemath/libnativemath.so
 ext/libnativemath/libnativemath_wrap.cxx
 ext/libnativemath/libnativemath_wrap.o
 ext/libnativemath/libnativemath.so
+Makefile

@@ -34,10 +34,6 @@ unless find_executable('swig')
   abort 'swig is missing. Please install it.'
 end
 
-unless File.exists?("#{MUPARSER_HEADERS}/mpParser.h")
-  abort 'mpParser.h header is missing.'
-end
-
 # iterate though the libs array, and append them to the $LOCAL_LIBS array used for the makefile creation
 libs.each do |lib|
   $LOCAL_LIBS << "#{lib} "
@@ -45,6 +41,11 @@ end
 
 Dir.chdir(BASEDIR) do
   system("git submodule update --init --recursive")
+
+  unless File.exists?("#{MUPARSER_HEADERS}/mpParser.h")
+    abort 'mpParser.h header is missing.'
+  end
+
   Dir.chdir("ext/equations-parser/") do
     system("cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release")
     system("make")

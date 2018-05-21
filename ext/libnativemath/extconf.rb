@@ -24,6 +24,7 @@ libs.each do |lib|
   $LOCAL_LIBS << "#{lib} "
 end
 
+system("pwd")
 system("git submodule update --init --recursive")
 Dir.chdir("ext/equations-parser/") do
   system("cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release")

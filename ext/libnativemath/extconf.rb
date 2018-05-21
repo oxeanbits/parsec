@@ -3,8 +3,8 @@ require 'mkmf'
 
 LIBDIR     = RbConfig::CONFIG['libdir']
 INCLUDEDIR = RbConfig::CONFIG['includedir']
-MUPARSER_HEADERS = 'ext/equations-parser/parser'
-MUPARSER_LIB = 'ext/equations-parser'
+MUPARSER_HEADERS = '../../ext/equations-parser/parser'
+MUPARSER_LIB = '../../ext/equations-parser'
 
 HEADER_DIRS = [INCLUDEDIR, MUPARSER_HEADERS]
 

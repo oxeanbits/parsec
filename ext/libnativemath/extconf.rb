@@ -17,14 +17,13 @@ LIB_DIRS = [LIBDIR, MUPARSER_LIB]
 # array of all libraries that the C extension should be compiled against
 libs = ['-lmuparserx']
 
-dir_config('.', HEADER_DIRS, LIB_DIRS)
+dir_config('libnativemath', HEADER_DIRS, LIB_DIRS)
 
 # iterate though the libs array, and append them to the $LOCAL_LIBS array used for the makefile creation
 libs.each do |lib|
   $LOCAL_LIBS << "#{lib} "
 end
 
-system("cd ../../")
 system("git submodule update --init --recursive")
 Dir.chdir("ext/equations-parser/") do
   system("cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release")

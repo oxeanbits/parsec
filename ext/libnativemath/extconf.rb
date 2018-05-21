@@ -2,6 +2,8 @@
 require 'mkmf'
 require "bundler/gem_tasks"
 
+Bundler::GemHelper.install_tasks :name => "parsec"
+
 LIBDIR     = RbConfig::CONFIG['libdir']
 INCLUDEDIR = RbConfig::CONFIG['includedir']
 MUPARSER_HEADERS = 'ext/equations-parser/parser'

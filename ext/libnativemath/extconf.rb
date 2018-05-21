@@ -26,6 +26,10 @@ libs = ['-lmuparserx']
 
 dir_config('libnativemath', HEADER_DIRS, LIB_DIRS)
 
+unless find_executable('cmake')
+  abort 'swig is missing. Please install it.'
+end
+
 unless find_executable('swig')
   abort 'swig is missing. Please install it.'
 end

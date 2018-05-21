@@ -48,5 +48,19 @@ Value Calc(string input) {
 
 std::string native_eval(std::string input)
 {
-  return Calc(input).AsString();
+  Value ans = Calc(input);
+  cout << "TYPE: " << ans.GetType() << endl;
+  return ans.AsString();
+}
+
+/* libpayroll.c */
+int calculate_income_tax(string input, double *tax, char *value_type) {
+  double amount = 200;
+
+  value_type[0] = 'i';
+  value_type[1] = '\0';
+
+  *tax = 0.25 * amount;
+
+  return 0;
 }

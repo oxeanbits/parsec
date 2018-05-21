@@ -2,8 +2,8 @@
 require 'mkmf'
 LIBDIR     = RbConfig::CONFIG['libdir']
 INCLUDEDIR = RbConfig::CONFIG['includedir']
-MUPARSER_HEADERS = 'equations-parser/parser'
-MUPARSER_LIB = 'equations-parser'
+MUPARSER_HEADERS = '../equations-parser/parser'
+MUPARSER_LIB = '../equations-parser'
 
 HEADER_DIRS = [INCLUDEDIR, MUPARSER_HEADERS]
 

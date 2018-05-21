@@ -15,15 +15,14 @@ task :build_ext do
     sh "make"
   end
 
-  Dir.chdir("ext/") do
+  Dir.chdir("ext/libnativemath/") do
     sh "swig -c++ -ruby libnativemath.i"
     ruby "extconf.rb"
     sh "make"
   end
-
-  %w[ext/libnativemath.so ext/libnativemath.bundle].each do |file|
-    cp file, "lib/" if system("[ -e #{file} ]")
-  end
+  #%w[ext/libnativemath/libnativemath.so ext/libnativemath/libnativemath.bundle].each do |file|
+  #  cp file, "lib/" if system("[ -e #{file} ]")
+  #end
 end
 
 Rake::TestTask.new(:test) do |test|

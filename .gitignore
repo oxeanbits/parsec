@@ -41,9 +41,9 @@ coverage
 Gemfile.lock
 tmp.json
 
-ext/Makefile
-ext/libnativemath.o
-ext/libnativemath.so
-ext/libnativemath_wrap.cxx
-ext/libnativemath_wrap.o
-lib/libnativemath.so
+ext/libnativemath/Makefile
+ext/libnativemath/libnativemath.o
+ext/libnativemath/libnativemath.so
+ext/libnativemath/libnativemath_wrap.cxx
+ext/libnativemath/libnativemath_wrap.o
+ext/libnativemath/libnativemath.so

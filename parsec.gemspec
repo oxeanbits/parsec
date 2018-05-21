@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name               = "parsec"
-  s.version            = "0.1.0"
+  s.version            = "0.2.0"
   s.platform           = Gem::Platform::RUBY
   s.authors            = ["Nilton Vasques", "Victor Cordeiro", "Beatriz Fagundes"]
   s.email              = ["nilton.vasques@gmail.com", "victorcorcos@gmail.com", "beatrizsfslima@gmail.com"]
@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
   s.require_paths      = ["lib"]
   s.license            = "mit"
 
-  s.add_development_dependency "mocha", "~> 0.3"
   s.add_development_dependency "rake", "~> 12.1"
   s.add_development_dependency "minitest", "~> 5.10"
 end

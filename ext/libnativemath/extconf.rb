@@ -24,16 +24,14 @@ libs.each do |lib|
   $LOCAL_LIBS << "#{lib} "
 end
 
-Dir.chdir("../../") do
-  system("git submodule update --init --recursive")
-end
-
-Dir.chdir("../equations-parser/") do
+system("cd ../../")
+system("git submodule update --init --recursive")
+Dir.chdir("ext/equations-parser/") do
   system("cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release")
   system("make")
 end
 
-Dir.chdir(".") do
+Dir.chdir("ext/libnativemath/") do
   system("swig -c++ -ruby libnativemath.i")
   #ruby "extconf.rb"
   #sh "make"

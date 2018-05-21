@@ -9,10 +9,7 @@ using namespace std;
 using namespace mup;
 
 Value Calc(string input) {
-  cout << "#####################" << endl;
-  cout << input << endl;
-  cout << "#####################" << endl;
-  ParserX  parser(pckALL_NON_COMPLEX);
+  ParserX parser(pckALL_NON_COMPLEX);
 
   Value ans;
   parser.DefineVar(_T("ans"), Variable(&ans));

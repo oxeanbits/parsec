@@ -1,0 +1,3 @@
+[submodule "ext/equations-parser"]
+	path = ext/equations-parser
+	url = git@github.com:niltonvasques/equations-parser.git

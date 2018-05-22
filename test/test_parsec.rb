@@ -4,12 +4,12 @@ require 'parsec'
 # This class test all possible equations for this gem
 class TestParsec < Minitest::Test
   def test_defined
-    assert defined?(EquationsParser::Parsec)
-    assert defined?(EquationsParser::Parsec::VERSION)
+    assert defined?(Parsec::Parsec)
+    assert defined?(Parsec::Parsec::VERSION)
   end
 
   def test_eval_correct_equations
-    parsec = EquationsParser::Parsec
+    parsec = Parsec::Parsec
     assert_equal(1, parsec.eval_equation('((0.09/1.0)+2.58)-1.67'))
     assert_equal(40.6853, parsec.eval_equation('10^log(3+2)'))
     assert_equal(1, parsec.eval_equation('log(e)'))
@@ -25,7 +25,7 @@ class TestParsec < Minitest::Test
   end
 
   def test_string_manipulation
-    parsec = EquationsParser::Parsec
+    parsec = Parsec::Parsec
     assert_equal('HELLO WORLD', parsec.eval_equation('toupper(concat("hello ", "world"))'))
     assert_equal('test lowercase', parsec.eval_equation('tolower("TEST LOWERCASE")'))
     assert_equal('Hello', parsec.eval_equation('left("Hello World", 5)'))

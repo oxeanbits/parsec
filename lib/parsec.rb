@@ -1,7 +1,7 @@
 require 'string_to_boolean_refinements'
 require 'libnativemath'
 
-module EquationsParser
+module Parsec
   # This is the main class responsible to evaluate the equations
   class Parsec
     using StringToBooleanRefinements

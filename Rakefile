@@ -1,28 +1,20 @@
-require "bundler/gem_tasks"
+require 'bundler/gem_tasks'
 require 'rake/clean'
 require 'rake/testtask'
 
-task :default => :spec
+task default: :spec
 
 CLEAN.include('ext/**/*{.o,.log,.so,.bundle}')
 CLEAN.include('ext/**/Makefile')
 CLOBBER.include('lib/*{.so,.bundle}')
 
 desc 'Build the libnativemath C extension'
-task :build_ext do
-  #Dir.chdir("ext/equations-parser/") do
-  #  sh "cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release"
-  #  sh "make"
-  #end
 
-  Dir.chdir("ext/libnativemath/") do
-    #sh "swig -c++ -ruby libnativemath.i"
-    ruby "extconf.rb"
-    sh "make"
+task :build_ext do
+  Dir.chdir('ext/libnativemath/') do
+    ruby 'extconf.rb'
+    sh 'make'
   end
-  #%w[ext/libnativemath/libnativemath.so ext/libnativemath/libnativemath.bundle].each do |file|
-  #  cp file, "lib/" if system("[ -e #{file} ]")
-  #end
 end
 
 Rake::TestTask.new(:test) do |test|

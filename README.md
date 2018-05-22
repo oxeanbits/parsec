@@ -35,7 +35,7 @@ parser.validate_syntax('3>=2 ? 1 : 0') # correct syntax, returns true
 
 ```ruby
 parser = Parsec::Parsec
-parser.validate_syntax('3>=2 ? 1') # bad syntax, returns StandarError with the message 'Wrong formula syntax'
+parser.validate_syntax('3>=2 ? 1') # bad syntax, returns ArgumentError with appropriated message
 ```
 
 #### Here are examples of equations which are accepted by the parser
@@ -51,7 +51,7 @@ parser.eval_equation('sqrt(16) + cbrt(8)')
 parser.eval_equation('log10(10)')
 parser.eval_equation('round(4.4)')
 parser.eval_equation('(3^3)^2')
-parser.eval_equation('3^(3^(2)')
+parser.eval_equation('3^(3^(2))')
 parser.eval_equation('10!')
 
 # Complex Math equations

@@ -12,30 +12,12 @@ gem 'parsec'
 
 * Use Ruby version 2.5.1
 
-#### Add to the top of your <filename> file
-
-```ruby
-require 'parsec'
-```
-
 #### You can then eval equations in your code
 
 ```ruby
 parser = Parsec::Parsec
 parser.eval_equation('5 + 1')
 parser.eval_equation('(3 + 3) * (5 * 2)')
-```
-
-#### You can also validate the formula syntax
-
-```ruby
-parser = Parsec::Parsec
-parser.validate_syntax('3>=2 ? 1 : 0') # correct syntax, returns true
-```
-
-```ruby
-parser = Parsec::Parsec
-parser.validate_syntax('3>=2 ? 1') # bad syntax, returns ArgumentError with appropriated message
 ```
 
 #### Here are examples of equations which are accepted by the parser

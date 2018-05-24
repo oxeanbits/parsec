@@ -33,8 +33,7 @@ Value Calc(string input) {
   return ans;
 }
 
-string_type native_direct_eval(string_type input)
-{
+string_type native_direct_eval(string_type input) {
   Value ans = Calc(input);
   return ans.AsString();
 }

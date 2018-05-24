@@ -20,6 +20,16 @@ parser.eval_equation('5 + 1')
 parser.eval_equation('(3 + 3) * (5 * 2)')
 ```
 
+#### And also validate the syntax of the equations
+
+```ruby
+parser = Parsec::Parsec
+parser.validate_syntax('4 + 4') # return => true
+parser.validate_syntax('4 + ')  # raise ArgumentError with message: Unexpected end of expression found at position 4.
+parser.validate_syntax('(4 + 3) + ( 4 + 2)') # return => true
+parser.validate_syntax('(4 + 3) + ( 4 + 2')  # raise ArgumentError with message: Missing parenthesis.
+```
+
 #### Here are examples of equations which are accepted by the parser
 ```ruby
 parser = Parsec::Parsec

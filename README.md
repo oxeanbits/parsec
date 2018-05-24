@@ -28,6 +28,9 @@ parser.validate_syntax('4 + 4') # return => true
 parser.validate_syntax('4 + ')  # raise ArgumentError with message: Unexpected end of expression found at position 4.
 parser.validate_syntax('(4 + 3) + ( 4 + 2)') # return => true
 parser.validate_syntax('(4 + 3) + ( 4 + 2')  # raise ArgumentError with message: Missing parenthesis.
+parser.validate_syntax('4==4 ? true : false') # return => true
+parser.validate_syntax('4==4 ? true')         # raise ArgumentError with message: If-then-else operator is missing an else clause.
+parser.validate_syntax('4==4 ^ true : false') # raise ArgumentError with message: Misplaced colon at position 12.
 ```
 
 #### Here are examples of equations which are accepted by the parser

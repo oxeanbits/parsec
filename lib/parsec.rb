@@ -15,8 +15,6 @@ module Parsec
     end
 
     def self.validate_syntax(equation)
-      remove_spaces(equation)
-
       validate(Libnativemath.native_eval(equation))
     end
 

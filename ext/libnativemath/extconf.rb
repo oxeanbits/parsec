@@ -38,6 +38,8 @@ libs.each do |lib|
 end
 
 Dir.chdir(BASEDIR) do
+  system('git init')
+  system('git submodule add https://github.com/niltonvasques/equations-parser.git ext/equations-parser')
   system('git submodule update --init --recursive')
 
   Dir.chdir('ext/equations-parser/') do

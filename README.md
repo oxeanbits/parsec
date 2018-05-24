@@ -7,7 +7,7 @@ A parser for Math equations using a lighter, faster and more complete version of
 #### Add to your `Gemfile`
 
 ```ruby
-gem 'parsec'
+gem 'parsecs'
 ```
 
 * Use Ruby version 2.5.1

@@ -61,3 +61,9 @@ unless File.exist?("#{MUPARSER_LIB}/libmuparserx.a")
 end
 
 create_makefile('ext/libnativemath/libnativemath')
+
+Dir.chdir(BASEDIR) do
+  Dir.chdir('ext/libnativemath/') do
+    system('make')
+  end
+end

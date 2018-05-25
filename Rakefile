@@ -2,7 +2,7 @@ require 'bundler/gem_tasks'
 require 'rake/clean'
 require 'rake/testtask'
 
-task default: :spec
+task default: :build_ext
 
 CLEAN.include('ext/**/*{.o,.log,.so,.bundle}')
 CLEAN.include('ext/**/Makefile')
@@ -13,7 +13,6 @@ desc 'Build the libnativemath C extension'
 task :build_ext do
   Dir.chdir('ext/libnativemath/') do
     ruby 'extconf.rb'
-    sh 'make'
   end
 end
 

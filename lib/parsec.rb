@@ -6,7 +6,7 @@ module Parsec
   class Parsec
     using StringToBooleanRefinements
 
-    VERSION = '0.2.15'.freeze
+    VERSION = '0.2.16'.freeze
 
     def self.eval_equation(equation)
       remove_spaces(equation)

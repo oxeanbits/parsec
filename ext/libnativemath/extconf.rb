@@ -15,8 +15,19 @@ MUPARSER_LIB = "#{BASEDIR}/ext/equations-parser".freeze
 
 HEADER_DIRS = [INCLUDEDIR, MUPARSER_HEADERS].freeze
 
-puts HEADER_DIRS
-puts LIBDIR
+puts '#'*90
+puts 'LIBDIR: ' << LIBDIR.to_s
+puts '#'*90
+puts 'HEADER_DIRS: ' << HEADER_DIRS.to_s
+puts '#'*90
+puts 'MUPARSER_LIB: ' << HEADER_DIRS.to_s
+puts '#'*90
+puts '#'*20 << ' -- 1st pwd -- ' << '#'*20
+puts Dir.pwd
+puts '#'*90
+puts '#'*20 << ' -- 1st ls -- ' << '#'*20
+puts Dir.entries('.')
+puts '#'*90
 
 # setup constant that is equal to that of the file path that holds
 # that static libraries that will need to be compiled against
@@ -43,8 +54,24 @@ Dir.chdir(BASEDIR) do
   system('git submodule update --init --recursive')
 
   Dir.chdir('ext/equations-parser/') do
-    system('cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release')
-    system('make')
+    puts '#'*90
+    puts '#'*20 << ' -- 2nd pwd -- ' << '#'*20
+    puts Dir.pwd
+    puts '#'*90
+    puts '#'*20 << ' -- 2nd ls -- ' << '#'*20
+    puts Dir.entries('.')
+    puts '#'*90
+
+    # system('cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release')
+    # system('make')
+
+    puts '#'*90
+    puts '#'*20 << ' -- cmake (C++ muparserx) -- ' << '#'*20
+    puts `cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release`
+    puts '#'*90
+    puts '#'*20 << ' -- make (C++ muparserx) -- ' << '#'*20
+    puts `make`
+    puts '#'*90
   end
 
   Dir.chdir('ext/libnativemath/') do
@@ -64,6 +91,13 @@ create_makefile('ext/libnativemath/libnativemath')
 
 Dir.chdir(BASEDIR) do
   Dir.chdir('ext/libnativemath/') do
-    system('make')
+    # system('make')
+
+    puts '#'*90
+    puts '#'*20 << ' -- make (Swig) -- ' << '#'*20
+    puts `make`
+    puts '#'*90
+    abort 'ABORTED HERE'
+    puts '#'*90
   end
 end

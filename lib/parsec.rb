@@ -6,16 +6,23 @@ module Parsec
   class Parsec
     using StringToBooleanRefinements
 
-    VERSION = '0.2.16'.freeze
+    VERSION = '0.2.17'.freeze
 
+    # evaluates the equation
     def self.eval_equation(equation)
       remove_spaces(equation)
 
       convert(Libnativemath.native_eval(equation))
     end
 
+    # returns true or raise an error
     def self.validate_syntax(equation)
-      validate(Libnativemath.native_eval(equation))
+      validate(Libnativemath.native_eval(equation), true)
+    end
+
+    # returns true or an error string
+    def self.verify_syntax(equation)
+      validate(Libnativemath.native_eval(equation), false)
     end
 
     private_class_method
@@ -36,19 +43,20 @@ module Parsec
       when 'int'     then return ans['value'].to_i
       when 'float'   then return ans['value'].to_f
       when 'boolean' then return ans['value'].to_bool
-      when 'string'  then return verify_string(ans['value'])
+      when 'string'  then return syntax_check(ans['value'])
       when 'c'       then return 'complex number'
       end
     end
 
-    def self.verify_string(output)
-      raise ArgumentError, output.sub('Error: ', '') if output.include?('Error')
+    def self.syntax_check(output)
+      raise SyntaxError, output.sub('Error: ', '') if output.include?('Error')
       output.delete('\"')
     end
 
-    def self.validate(ans)
+    def self.validate(ans, raise_error)
       if (ans['type'] == 'string') && ans['value'].include?('Error: ')
-        raise ArgumentError, ans['value'].sub('Error: ', '')
+        raise SyntaxError, ans['value'].sub('Error: ', '') if raise_error
+        return ans['value'].sub('Error: ', '')
       end
       true
     end

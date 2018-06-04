@@ -43,12 +43,12 @@ module Parsec
       when 'int'     then return ans['value'].to_i
       when 'float'   then return ans['value'].to_f
       when 'boolean' then return ans['value'].to_bool
-      when 'string'  then return syntax_check(ans['value'])
+      when 'string'  then return error_check(ans['value'])
       when 'c'       then return 'complex number'
       end
     end
 
-    def self.syntax_check(output)
+    def self.error_check(output)
       raise SyntaxError, output.sub('Error: ', '') if output.include?('Error')
       output.delete('\"')
     end

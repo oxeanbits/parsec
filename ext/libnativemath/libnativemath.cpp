@@ -1,4 +1,5 @@
 /* ext/libnativemath.cpp */
+#include <string>
 #include <iostream>
 #include <cmath>
 #include "mpParser.h"
@@ -33,17 +34,21 @@ Value Calc(string input) {
   return ans;
 }
 
-string_type native_direct_eval(string_type input) {
+string native_direct_eval(string input) {
   Value ans = Calc(input);
   return ans.AsString();
 }
 
-int native_eval(string input, char *value, char *value_type) {
+string native_eval(string input) {
   Value ans = Calc(input);
+  stringstream_type ss;
 
-  value_type[0] = ans.GetType();
-  value_type[1] = '\0';
+  // Converting to json-like string
+  ss << _T("{");
+  ss << _T("\"value\": \"") << ans.AsString() << _T("\"");
+  ss << _T(", ");
+  ss << _T("\"type\": \"") << ans.GetType() << _T("\"");
+  ss << _T("}");
 
-  strcpy(value, ans.AsString().c_str());
-  return 0;
+  return ss.str();
 }

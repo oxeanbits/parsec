@@ -1,28 +1,29 @@
 require 'string_to_boolean_refinements'
 require 'libnativemath'
+require 'json'
 
 module Parsec
   # This is the main class responsible to evaluate the equations
   class Parsec
     using StringToBooleanRefinements
 
-    VERSION = '0.2.17'.freeze
+    VERSION = '0.2.18'.freeze
 
     # evaluates the equation
     def self.eval_equation(equation)
       remove_spaces(equation)
 
-      convert(Libnativemath.native_eval(equation))
+      convert(JSON.parse(Libnativemath.native_eval(equation)))
     end
 
     # returns true or raise an error
     def self.validate_syntax(equation)
-      validate(Libnativemath.native_eval(equation), true)
+      validate(JSON.parse(Libnativemath.native_eval(equation)), true)
     end
 
     # returns true or an error string
     def self.verify_syntax(equation)
-      validate(Libnativemath.native_eval(equation), false)
+      validate(JSON.parse(Libnativemath.native_eval(equation)), false)
     end
 
     private_class_method
@@ -40,11 +41,12 @@ module Parsec
       end
 
       case ans['type']
-      when 'int'     then return ans['value'].to_i
-      when 'float'   then return ans['value'].to_f
-      when 'boolean' then return ans['value'].to_bool
-      when 'string'  then return error_check(ans['value'])
-      when 'c'       then return 'complex number'
+      when 'i'  then return ans['value'].to_i
+      when 'f'  then return ans['value'].to_f
+      when 'b'  then return ans['value'].to_bool
+      when 's'  then return error_check(ans['value'])
+      when 'c'  then return 'complex number' # Maybe future implementation
+      when 'm'  then return 'matrix value'   # Maybe future implementation
       end
     end
 
@@ -54,7 +56,7 @@ module Parsec
     end
 
     def self.validate(ans, raise_error)
-      if (ans['type'] == 'string') && ans['value'].include?('Error: ')
+      if (ans['type'] == 's') && ans['value'].include?('Error: ')
         raise SyntaxError, ans['value'].sub('Error: ', '') if raise_error
         return ans['value'].sub('Error: ', '')
       end

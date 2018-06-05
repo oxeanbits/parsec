@@ -1,11 +1,11 @@
-#require 'string_to_boolean_refinements'
+require 'string_to_boolean_refinements'
 require 'libnativemath'
 require 'json'
 
 module Parsec
   # This is the main class responsible to evaluate the equations
   class Parsec
-    #using StringToBooleanRefinements
+    using StringToBooleanRefinements
 
     VERSION = '0.2.18'.freeze
 
@@ -43,7 +43,7 @@ module Parsec
       case ans['type']
       when 'i'  then return ans['value'].to_i
       when 'f'  then return ans['value'].to_f
-      when 'b'  then return ans['value']#.to_bool
+      when 'b'  then return ans['value'].to_bool
       when 's'  then return error_check(ans['value'])
       when 'c'  then return 'complex number' # Maybe future implementation
       when 'm'  then return 'matrix value'   # Maybe future implementation

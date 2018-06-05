@@ -20,8 +20,8 @@ extern std::string native_direct_eval(std::string input);
     switch (*$2) {
       case 'i': rb_hash_aset($result, rb_str_new2("type"), rb_str_new2("int")); break;
       case 'f': rb_hash_aset($result, rb_str_new2("type"), rb_str_new2("float")); break;
-      case 's': rb_hash_aset($result, rb_str_new2("type"), rb_str_new2("string")); break;
       case 'b': rb_hash_aset($result, rb_str_new2("type"), rb_str_new2("boolean")); break;
+      case 's': rb_hash_aset($result, rb_str_new2("type"), rb_str_new2("string")); break;
       case 'c': rb_hash_aset($result, rb_str_new2("type"), rb_str_new2("complex")); break;
       case 'm': rb_hash_aset($result, rb_str_new2("type"), rb_str_new2("matrix")); break;
     }

@@ -17,7 +17,7 @@ task :build_ext do
 end
 
 Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
+  test.libs << 'lib' << 'ext/libnativemath' << 'test'
   test.pattern = 'test/test_*.rb'
   test.verbose = true
 end

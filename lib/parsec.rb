@@ -44,7 +44,8 @@ module Parsec
       when 'float'   then return ans['value'].to_f
       when 'boolean' then return ans['value'].to_bool
       when 'string'  then return error_check(ans['value'])
-      when 'c'       then return 'complex number'
+      when 'complex' then return 'complex number' # Maybe future implementation
+      when 'matrix'  then return 'matrix value'   # Maybe future implementation
       end
     end
 

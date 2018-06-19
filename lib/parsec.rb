@@ -6,31 +6,41 @@ module Parsec
   class Parsec
     using StringToBooleanRefinements
 
-    VERSION = '0.2.19'.freeze
+    VERSION = '0.2.20'.freeze
 
     # evaluates the equation
     def self.eval_equation(equation)
-      remove_spaces(equation)
+      remove('newline and space', equation)
 
       convert(Libnativemath.native_eval(equation))
     end
 
     # returns true or raise an error
     def self.validate_syntax(equation)
+      remove('newline', equation)
+
       validate(Libnativemath.native_eval(equation), true)
     end
 
     # returns true or an error string
     def self.verify_syntax(equation)
+      remove('newline', equation)
+
       validate(Libnativemath.native_eval(equation), false)
     end
 
     private_class_method
 
-    def self.remove_spaces(equation)
-      # This line removes all spaces that are not between quotation marks
-      # https://stackoverflow.com/questions/205521/using-regex-to-replace-all-spaces-not-in-quotes-in-ruby?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
-      equation.gsub!(/( |(".*?"))/, '\\2')
+    def self.remove(element, equation)
+      case element
+      when 'newline'
+        equation.gsub!(/[\n\t\r]/, ' ')
+      when 'newline and space'
+        equation.gsub!(/[\n\t\r]/, ' ')
+        # This line removes all spaces that are not between quotation marks
+        # https://stackoverflow.com/questions/205521/using-regex-to-replace-all-spaces-not-in-quotes-in-ruby?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+        equation.gsub!(/( |(".*?"))/, '\\2')
+      end
     end
 
     def self.convert(ans)

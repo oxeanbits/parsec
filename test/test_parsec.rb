@@ -86,19 +86,19 @@ class TestParsec < Minitest::Test
 
   def test_newlines_remotion
     parsec = Parsec::Parsec
-    assert_equal(true, parsec.verify_syntax("4 + \n 2"))
-    assert_equal(true, parsec.verify_syntax("\n4\n+ \n 2\n"))
-  end
-
-  def test_verify_syntax
-    parsec = Parsec::Parsec
-    assert_equal(true, parsec.verify_syntax('((0.09/1.0)+2.58)-1.6+'))
-    assert_equal('Missing parenthesis.', parsec.verify_syntax('(0.09/1.0'))
+    assert_equal(true, parsec.validate_syntax("4 + \n 2"))
+    assert_equal(true, parsec.validate_syntax("\n4\n+ \n 2\n"))
   end
 
   def test_validate_syntax
     parsec = Parsec::Parsec
     assert_equal(true, parsec.validate_syntax('((0.09/1.0)+2.58)-1.6+'))
-    assert_raises(parsec.validate_syntax('(0.09/1.0'))
+    assert_equal('Missing parenthesis.', parsec.validate_syntax('(0.09/1.0'))
+  end
+
+  def test_validate_syntax!
+    parsec = Parsec::Parsec
+    assert_equal(true, parsec.validate_syntax!('((0.09/1.0)+2.58)-1.6+'))
+    assert_raises(parsec.validate_syntax!('(0.09/1.0'))
   end
 end

@@ -16,14 +16,14 @@ module Parsec
     end
 
     # returns true or raise an error
-    def self.validate_syntax(equation)
+    def self.validate_syntax!(equation)
       remove(equation)
 
       validate(Libnativemath.native_eval(equation), true)
     end
 
     # returns true or an error string
-    def self.verify_syntax(equation)
+    def self.validate_syntax(equation)
       remove(equation)
 
       validate(Libnativemath.native_eval(equation), false)

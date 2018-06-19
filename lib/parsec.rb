@@ -42,6 +42,7 @@ module Parsec
     def self.convert(ans)
       case ans['value']
       when 'inf' then return 'Infinity'
+      when '-inf' then return '-Infinity'
       when 'nan' then return ans['value']
       end
 

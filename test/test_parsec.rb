@@ -83,4 +83,16 @@ class TestParsec < Minitest::Test
     assert_equal(5, parsec.eval_equation('round(4.62)'))
     assert_equal(4.63, parsec.eval_equation('round_decimal(4.625, 2)'))
   end
+
+  def test_verify_syntax
+    parsec = Parsec::Parsec
+    assert_equal(true, parsec.verify_syntax('((0.09/1.0)+2.58)-1.6+'))
+    assert_equal('Missing parenthesis.', parsec.verify_syntax('(0.09/1.0'))
+  end
+
+  def test_validate_syntax
+    parsec = Parsec::Parsec
+    assert_equal(true, parsec.validate_syntax('((0.09/1.0)+2.58)-1.6+'))
+    assert_raises(parsec.validate_syntax('(0.09/1.0'))
+  end
 end

@@ -34,7 +34,7 @@ module Parsec
     def self.remove(equation, new_line = false)
       equation.gsub!(/[\n\t\r]/, ' ')
 
-      # The following regex remove all spaces that are not between quotation marks
+      # The following regex remove all spaces that are not between quot marks
       # https://tinyurl.com/ybc7bng3
       equation.gsub!(/( |(".*?"))/, '\\2') if new_line == true
     end

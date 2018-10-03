@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'parsec'
+require 'date'
 
 # This class test all possible equations for this gem
 class TestParsec < Minitest::Test
@@ -92,13 +93,23 @@ class TestParsec < Minitest::Test
 
   def test_validate_syntax
     parsec = Parsec::Parsec
-    assert_equal(true, parsec.validate_syntax('((0.09/1.0)+2.58)-1.6+'))
+    refute_equal(true, parsec.validate_syntax('((0.09/1.0)+2.58)-1.6+'))
     assert_equal('Missing parenthesis.', parsec.validate_syntax('(0.09/1.0'))
   end
 
   def test_validate_syntax!
     parsec = Parsec::Parsec
-    assert_equal(true, parsec.validate_syntax!('((0.09/1.0)+2.58)-1.6+'))
-    assert_raises(parsec.validate_syntax!('(0.09/1.0'))
+    assert_raises(SyntaxError) { parsec.validate_syntax!('((0.09/1.0)+2.58)-1.6+') }
+    assert_raises(SyntaxError) { parsec.validate_syntax!('(0.09/1.0') }
+  end
+
+  def test_date_functions
+    parsec = Parsec::Parsec
+    assert_equal(Date.today, Date.parse(parsec.eval_equation("current_date()")))
+    assert_equal(364, parsec.eval_equation('daysdiff("2018-01-01", "2018-12-31")'))
+    assert_equal(365, parsec.eval_equation('daysdiff("2016-01-01", "2016-12-31")'))
+    assert_equal(365, parsec.eval_equation('daysdiff("2000-01-01", "2000-12-31")'))
+    assert_equal(364, parsec.eval_equation('daysdiff("2100-01-01", "2100-12-31")'))
+    assert_equal(1, parsec.eval_equation('daysdiff("2018-01-01", "2017-12-31")'))
   end
 end

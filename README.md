@@ -10,6 +10,10 @@ A parser for Math equations using a lighter, faster and more complete version of
 gem 'parsecs'
 ```
 
+## Tests
+
+      ruby -Ilib -Iext/libnativemath test/test_parsec.rb
+
 * Use Ruby version 2.5.1
 
 #### You can then eval equations in your code
@@ -80,6 +84,11 @@ parser.eval_equation('concat("Hello ", "World")') # result => "Hello World"
 parser.eval_equation('str2number("5")')           # result => 5
 parser.eval_equation('left("Hello World", 5)')    # result => "Hello"
 parser.eval_equation('right("Hello World", 5)')   # result => "World"
+
+# Date equations
+parsec.eval_equation("current_date()"))                        # result => "2018-10-03"
+parsec.eval_equation('daysdiff(current_date(), "2018-10-04")') # result => 1
+parsec.eval_equation('daysdiff("2018-01-01", "2018-12-31")')   # result => 364
 ```
 
 ### The following functions can be used

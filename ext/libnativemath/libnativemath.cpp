@@ -30,6 +30,11 @@ Value Calc(string input) {
       return error;
     }
   }
+  catch(std::runtime_error &)
+  {
+      string_type error = "Error: Runtime error";
+      return error;
+  }
   return ans;
 }
 

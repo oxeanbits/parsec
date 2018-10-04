@@ -38,6 +38,7 @@ libs.each do |lib|
 end
 
 GIT_REPOSITORY = 'https://github.com/niltonvasques/equations-parser.git'.freeze
+COMMIT = 'd53ae5eb308cb842351da7d1bb87c08e84c67d08'.freeze
 
 Dir.chdir(BASEDIR) do
   system('git init')
@@ -45,6 +46,7 @@ Dir.chdir(BASEDIR) do
   system('git submodule update --init --recursive')
 
   Dir.chdir('ext/equations-parser/') do
+    system("git checkout #{COMMIT}")
     system('cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=Release')
     system('make')
   end

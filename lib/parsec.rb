@@ -58,7 +58,7 @@ module Parsec
 
     def self.error_check(output)
       raise SyntaxError, output.sub(/^Error: /, '') if output.match?(/^Error:/)
-      output.delete('\"')
+      output
     end
 
     def self.validate(ans, raise_error)

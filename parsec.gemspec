@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name                  = 'parsecs'
-  s.version               = '0.2.20'
+  s.version               = '0.3.1'
   s.platform              = Gem::Platform::RUBY
   s.authors               = ['Nilton Vasques', 'Victor Cordeiro', 'Beatriz Fagundes']
   s.email                 = ['nilton.vasques@gmail.com', 'victorcorcos@gmail.com', 'beatrizsfslima@gmail.com']

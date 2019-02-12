@@ -12,7 +12,7 @@ gem 'parsecs'
 
 ## Tests
 
-      ruby -Ilib -Iext/libnativemath test/test_parsec.rb
+ruby -Ilib -Iext/libnativemath test/test_parsec.rb
 
 * Use Ruby version 2.5.1
 

@@ -63,6 +63,7 @@ class TestParsec < Minitest::Test
 
   def test_complex_string_manipulation
     parser = Parsec::Parsec
+    assert_equal('string with quote\"', parser.eval_equation('"string with quote\""'))
     assert_equal('HELLO WORLD', parser.eval_equation('toupper(concat("hello ", "world"))'))
     assert_equal('test lowercase', parser.eval_equation('tolower("TEST LOWERCASE")'))
     assert_equal('Hello', parser.eval_equation('left("Hello World", 5)'))

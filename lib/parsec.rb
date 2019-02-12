@@ -57,14 +57,14 @@ module Parsec
     end
 
     def self.error_check(output)
-      raise SyntaxError, output.sub('Error: ', '') if output.include?('Error')
-      output.delete('\"')
+      raise SyntaxError, output.sub(/^Error: /, '') if output.match?(/^Error:/)
+      output
     end
 
     def self.validate(ans, raise_error)
-      if (ans['type'] == 'string') && ans['value'].include?('Error: ')
-        raise SyntaxError, ans['value'].sub('Error: ', '') if raise_error
-        return ans['value'].sub('Error: ', '')
+      if (ans['type'] == 'string') && ans['value'].match?(/^Error:/)
+        raise SyntaxError, ans['value'].sub(/^Error: /, '') if raise_error
+        return ans['value'].sub(/^Error: /, '')
       end
       true
     end

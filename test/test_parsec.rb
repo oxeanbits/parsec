@@ -57,6 +57,7 @@ class TestParsec < Minitest::Test
     assert_equal('test string', parser.eval_equation('tolower("TEST STRING")'))
     assert_equal('Hello World', parser.eval_equation('concat("Hello ", "World")'))
     assert_equal(5, parser.eval_equation('str2number("5")'))
+    assert_equal(5, parser.eval_equation('number("5")'))
     assert_equal('Hello', parser.eval_equation('left("Hello World", 5)'))
     assert_equal('World', parser.eval_equation('right("Hello World", 5)'))
   end
@@ -84,6 +85,8 @@ class TestParsec < Minitest::Test
     assert_equal(0.55, parsec.eval_equation('avg(1,2,3,4,5,6,7,8,9,10) / 10'))
     assert_equal(5, parsec.eval_equation('round(4.62)'))
     assert_equal(4.63, parsec.eval_equation('round_decimal(4.625, 2)'))
+    assert_equal('5', parsec.eval_equation('string(5)'))
+    assert_equal('5.123', parsec.eval_equation('string(5.123)'))
   end
 
   def test_newlines_remotion

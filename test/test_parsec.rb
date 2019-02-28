@@ -123,10 +123,23 @@ class TestParsec < Minitest::Test
     assert_equal(:int, parsec.get_result_type('10!'))
     assert_equal(:int, parsec.get_result_type('daysdiff("2018-01-01", "2017-12-31")'))
     assert_equal(:float, parsec.get_result_type('log10(10) + ln(e) + log(10)'))
+    assert_equal(:float, parsec.get_result_type('number("5.1")'))
     assert_equal(:string, parsec.get_result_type('4 > 2 ? "bigger" : "smaller"'))
     assert_equal(:string, parsec.get_result_type('string(5.123)'))
     assert_equal(:boolean, parsec.get_result_type('2 == 2 ? true : false'))
     assert_equal(:boolean, parsec.get_result_type('2 != 2 ? true : false'))
     assert_equal(:boolean, parsec.get_result_type('(3==3) and (3!=3)'))
+  end
+
+  def test_last_result_type
+    parsec = Parsec::Parsec
+    parsec.eval_equation('(5 + 1) + (6 - 2)')
+    assert_equal(:int, parsec.last_result_type)
+    parsec.eval_equation('number("5.1")')
+    assert_equal(:float, parsec.last_result_type)
+    parsec.eval_equation('string(5.123)')
+    assert_equal(:string, parsec.last_result_type)
+    parsec.eval_equation('(3==3) and (3!=3)')
+    assert_equal(:boolean, parsec.last_result_type)
   end
 end

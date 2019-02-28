@@ -8,7 +8,7 @@ module Parsec
 
     VERSION = '0.5.1'.freeze
 
-    # define an instance class variable to return the result type of the last equation evaluated
+    # define an instance class variable to store the result type of the last evaluated equation
     class <<self
       attr_accessor :last_result_type
     end

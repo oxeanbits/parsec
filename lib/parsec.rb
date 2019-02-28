@@ -29,6 +29,13 @@ module Parsec
       validate(Libnativemath.native_eval(equation), false)
     end
 
+    def self.get_result_type(equation)
+      remove(equation, true)
+
+      result = Libnativemath.native_eval(equation)
+      result['type'].to_sym
+    end
+
     private_class_method
 
     def self.remove(equation, new_line = false)

@@ -8,16 +8,17 @@ module Parsec
 
     VERSION = '0.5.1'.freeze
 
-    # define an instance class variable to store the result type of the last evaluated equation
-    class <<self
-      attr_accessor :last_result_type
+    # evaluates the equation and returns only the result
+    def self.eval_equation(equation)
+      eval_equation_with_type(equation)[:value]
     end
 
-    # evaluates the equation
-    def self.eval_equation(equation)
+    # evaluates the equation and returns the result and its data type
+    def self.eval_equation_with_type(equation)
       remove(equation, true)
 
-      convert(Libnativemath.native_eval(equation))
+      result = Libnativemath.native_eval(equation)
+      { value: convert(result), type: result['type'].to_sym }
     end
 
     # returns true or raise an error
@@ -57,8 +58,6 @@ module Parsec
       when '-inf' then return '-Infinity'
       when 'nan' then return ans['value']
       end
-
-      self.last_result_type = ans['type'].to_sym
 
       case ans['type']
       when 'int'     then return ans['value'].to_i

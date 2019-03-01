@@ -129,6 +129,11 @@ class TestParsec < Minitest::Test
     assert_equal(:boolean, parsec.get_result_type('2 == 2 ? true : false'))
     assert_equal(:boolean, parsec.get_result_type('2 != 2 ? true : false'))
     assert_equal(:boolean, parsec.get_result_type('(3==3) and (3!=3)'))
+    assert_equal(:float, parsec.get_result_type('4 / 0'))
+    assert_equal(:float, parsec.get_result_type('0 / 0'))
+    # invalid equations raises an error
+    assert_raises(SyntaxError) { parsec.get_result_type('concat(1, 2)') }
+    assert_raises(SyntaxError) { parsec.get_result_type('4 > 2 ? "smaller"') }
   end
 
   def test_last_result_type

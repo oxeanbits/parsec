@@ -38,7 +38,7 @@ module Parsec
       remove(equation, true)
 
       result = Libnativemath.native_eval(equation)
-      result['type'].to_sym
+      result['type'].to_sym if validate(result, true)
     end
 
     private_class_method

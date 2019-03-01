@@ -6,13 +6,19 @@ module Parsec
   class Parsec
     using StringToBooleanRefinements
 
-    VERSION = '0.4.1'.freeze
+    VERSION = '0.5.1'.freeze
 
-    # evaluates the equation
+    # evaluates the equation and returns only the result
     def self.eval_equation(equation)
+      eval_equation_with_type(equation)[:value]
+    end
+
+    # evaluates the equation and returns the result and its data type
+    def self.eval_equation_with_type(equation)
       remove(equation, true)
 
-      convert(Libnativemath.native_eval(equation))
+      result = Libnativemath.native_eval(equation)
+      { value: convert(result), type: result['type'].to_sym }
     end
 
     # returns true or raise an error
@@ -27,6 +33,13 @@ module Parsec
       remove(equation)
 
       validate(Libnativemath.native_eval(equation), false)
+    end
+
+    def self.get_result_type(equation)
+      remove(equation, true)
+
+      result = Libnativemath.native_eval(equation)
+      result['type'].to_sym if validate(result, true)
     end
 
     private_class_method

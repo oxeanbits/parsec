@@ -13,6 +13,8 @@ gem 'parsecs'
 ## Tests
 
 ```ruby
+gem build parsec.gemspec
+gem install ./parsecs-VERSION.gem (e.g.: gem install ./parsecs-0.5.1.gem)
 ruby -Ilib -Iext/libnativemath test/test_parsec.rb
 ```
 

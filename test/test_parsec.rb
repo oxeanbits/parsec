@@ -95,6 +95,12 @@ class TestParsec < Minitest::Test
     assert_equal(true, parsec.validate_syntax("\n4\n+ \n 2\n"))
   end
 
+  def test_equation_with_bad_syntax
+    parsec = Parsec::Parsec
+    assert_raises(SyntaxError) { parsec.eval_equation('concat(1, 2)') }
+    assert_raises(SyntaxError) { parsec.eval_equation('4 > 2 ? "smaller"') }
+  end
+
   def test_validate_syntax
     parsec = Parsec::Parsec
     refute_equal(true, parsec.validate_syntax('((0.09/1.0)+2.58)-1.6+'))
@@ -115,5 +121,27 @@ class TestParsec < Minitest::Test
     assert_equal(365, parsec.eval_equation('daysdiff("2000-01-01", "2000-12-31")'))
     assert_equal(364, parsec.eval_equation('daysdiff("2100-01-01", "2100-12-31")'))
     assert_equal(1, parsec.eval_equation('daysdiff("2018-01-01", "2017-12-31")'))
+  end
+
+  def test_eval_equation_with_type
+    parsec = Parsec::Parsec
+    assert_equal({ value: 10, type: :int }, parsec.eval_equation_with_type('(5 + 1) + (6 - 2)'))
+    assert_equal({ value: 362_880_0, type: :int }, parsec.eval_equation_with_type('10!'))
+    equation_date = 'daysdiff("2018-01-01", "2017-12-31")'
+    assert_equal({ value: 1, type: :int }, parsec.eval_equation_with_type(equation_date))
+    assert_equal({ value: 40.6853, type: :float }, parsec.eval_equation_with_type('10^log(3+2)'))
+    assert_equal({ value: 5.1, type: :float }, parsec.eval_equation_with_type('number("5.1")'))
+    equation_if = '4 > 2 ? "bigger" : "smaller"'
+    assert_equal({ value: "bigger", type: :string }, parsec.eval_equation_with_type(equation_if))
+    assert_equal({ value: "5.123", type: :string }, parsec.eval_equation_with_type('string(5.123)'))
+    equation_boolean = '2 == 2 ? true : false'
+    assert_equal({ value: true, type: :boolean }, parsec.eval_equation_with_type(equation_boolean))
+    equation_boolean = '(3==3) and (3!=3)'
+    assert_equal({ value: false, type: :boolean }, parsec.eval_equation_with_type(equation_boolean))
+    assert_equal({ value: 'Infinity', type: :float }, parsec.eval_equation_with_type('4 / 0'))
+    assert_equal({ value: 'nan', type: :float }, parsec.eval_equation_with_type('0 / 0'))
+    # invalid equations raises an error
+    assert_raises(SyntaxError) { parsec.eval_equation_with_type('concat(1, 2)') }
+    assert_raises(SyntaxError) { parsec.eval_equation_with_type('4 > 2 ? "smaller"') }
   end
 end

@@ -107,7 +107,8 @@ parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-01")')             # resu
 
 * Math trigonometric functions: **sin**, **cos**, **tan**, **sinh**, **cosh**, **tanh**, **asin**, **acos**, **atan**, **asinh**, **acosh**, **atanh**
 * Math logarithm functions: **ln**, **log**, **log10**
-* Math standard functions: **abs**, **sqrt**, **cbrt**, **pow**, **exp**, **round**, **round_decimal**, **string**
+* Math standard functions: **abs**, **sqrt**, **cbrt**, **pow**, **exp**, **round**, **round_decimal**
+* Number functions: **string**
 * Math constants: **e**, **pi**
 * Unlimited number of arguments: **min**, **max**, **sum**, **avg**
 * String functions: **concat**, **length**, **toupper**, **tolower**, **left**, **right**, **str2number**, **number**

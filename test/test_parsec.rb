@@ -123,6 +123,19 @@ class TestParsec < Minitest::Test
     assert_equal(1, parsec.eval_equation('daysdiff("2018-01-01", "2017-12-31")'))
   end
 
+  def test_datetime_functions
+    parsec = Parsec::Parsec
+    assert_equal(24, parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-02")'))
+    assert_equal(288, parsec.eval_equation('hoursdiff("2019-02-01", "2019-02-13")'))
+    assert_equal(4, parsec.eval_equation('hoursdiff("2019-02-01T08:00", "2019-02-01T12:00")'))
+    assert_equal(28, parsec.eval_equation('hoursdiff("2019-02-01T08:00", "2019-02-02T12:00")'))
+    assert_equal(3.67, parsec.eval_equation('hoursdiff("2019-02-01T08:20", "2019-02-01T12:00")'))
+    assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff("2018-01-01", "INVALID2")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff("INVALID1", "2018-01-01")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff("INVALID1", "INVALID2")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff(2, 3)') }
+  end
+
   def test_eval_equation_with_type
     parsec = Parsec::Parsec
     assert_equal({ value: 10, type: :int }, parsec.eval_equation_with_type('(5 + 1) + (6 - 2)'))

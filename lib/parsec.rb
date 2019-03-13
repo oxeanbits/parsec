@@ -6,7 +6,7 @@ module Parsec
   class Parsec
     using StringToBooleanRefinements
 
-    VERSION = '0.5.1'.freeze
+    VERSION = '0.6.1'.freeze
 
     # evaluates the equation and returns only the result
     def self.eval_equation(equation)
@@ -15,7 +15,7 @@ module Parsec
 
     # evaluates the equation and returns the result and its data type
     def self.eval_equation_with_type(equation)
-      remove(equation, true)
+      sanitize(equation, true)
 
       result = Libnativemath.native_eval(equation)
       { value: convert(result), type: result['type'].to_sym }
@@ -23,20 +23,20 @@ module Parsec
 
     # returns true or raise an error
     def self.validate_syntax!(equation)
-      remove(equation)
+      sanitize(equation)
 
       validate(Libnativemath.native_eval(equation), true)
     end
 
     # returns true or an error string
     def self.validate_syntax(equation)
-      remove(equation)
+      sanitize(equation)
 
       validate(Libnativemath.native_eval(equation), false)
     end
 
     def self.get_result_type(equation)
-      remove(equation, true)
+      sanitize(equation, true)
 
       result = Libnativemath.native_eval(equation)
       result['type'].to_sym if validate(result, true)
@@ -44,7 +44,7 @@ module Parsec
 
     private_class_method
 
-    def self.remove(equation, new_line = false)
+    def self.sanitize(equation, new_line = false)
       equation.gsub!(/[\n\t\r]/, ' ')
 
       # The following regex remove all spaces that are not between quot marks

@@ -136,6 +136,8 @@ class TestParsec < Minitest::Test
     assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff("INVALID1", "2018-01-01")') }
     assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff("INVALID1", "INVALID2")') }
     assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff(2, 3)') }
+    assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-01T12:00")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff("2018-01-01T12:00", "2018-01-01")') }
   end
 
   def test_eval_equation_with_type

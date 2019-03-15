@@ -132,6 +132,7 @@ class TestParsec < Minitest::Test
     assert_equal(24, parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-2")'))
     assert_equal(24, parsec.eval_equation('hoursdiff("2018-01-1", "2018-01-02")'))
     assert_equal(24, parsec.eval_equation('hoursdiff("2018-01-1", "2018-01-2")'))
+    assert_equal(24, parsec.eval_equation('hoursdiff("2018-1-1", "2018-1-2")'))
     assert_equal(288, parsec.eval_equation('hoursdiff("2019-02-01", "2019-02-13")'))
     assert_equal(4, parsec.eval_equation('hoursdiff("2019-02-01T08:00", "2019-02-01T12:00")'))
     assert_equal(28, parsec.eval_equation('hoursdiff("2019-02-01T08:00", "2019-02-02T12:00")'))

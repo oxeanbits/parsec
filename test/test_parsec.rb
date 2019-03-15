@@ -116,6 +116,7 @@ class TestParsec < Minitest::Test
   def test_date_functions
     parsec = Parsec::Parsec
     assert_equal(Date.today, Date.parse(parsec.eval_equation("current_date()")))
+    assert_match(/^\d{4}-\d{2}-\d{2}$/, parsec.eval_equation("current_date()"))
     assert_equal(364, parsec.eval_equation('daysdiff("2018-01-01", "2018-12-31")'))
     assert_equal(365, parsec.eval_equation('daysdiff("2016-01-01", "2016-12-31")'))
     assert_equal(365, parsec.eval_equation('daysdiff("2000-01-01", "2000-12-31")'))

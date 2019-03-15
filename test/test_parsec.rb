@@ -116,6 +116,7 @@ class TestParsec < Minitest::Test
   def test_date_functions
     parsec = Parsec::Parsec
     assert_equal(Date.today, Date.parse(parsec.eval_equation("current_date()")))
+    assert_match(/^\d{4}-\d{2}-\d{2}$/, parsec.eval_equation("current_date()"))
     assert_equal(364, parsec.eval_equation('daysdiff("2018-01-01", "2018-12-31")'))
     assert_equal(365, parsec.eval_equation('daysdiff("2016-01-01", "2016-12-31")'))
     assert_equal(365, parsec.eval_equation('daysdiff("2000-01-01", "2000-12-31")'))
@@ -126,10 +127,19 @@ class TestParsec < Minitest::Test
   def test_datetime_functions
     parsec = Parsec::Parsec
     assert_equal(24, parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-02")'))
+    assert_equal(24, parsec.eval_equation('hoursdiff("2018-01-01", "2018-1-02")'))
+    assert_equal(24, parsec.eval_equation('hoursdiff("2018-1-01", "2018-01-02")'))
+    assert_equal(24, parsec.eval_equation('hoursdiff("2018-1-01", "2018-1-02")'))
+    assert_equal(24, parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-2")'))
+    assert_equal(24, parsec.eval_equation('hoursdiff("2018-01-1", "2018-01-02")'))
+    assert_equal(24, parsec.eval_equation('hoursdiff("2018-01-1", "2018-01-2")'))
+    assert_equal(24, parsec.eval_equation('hoursdiff("2018-1-1", "2018-1-2")'))
     assert_equal(288, parsec.eval_equation('hoursdiff("2019-02-01", "2019-02-13")'))
     assert_equal(4, parsec.eval_equation('hoursdiff("2019-02-01T08:00", "2019-02-01T12:00")'))
     assert_equal(28, parsec.eval_equation('hoursdiff("2019-02-01T08:00", "2019-02-02T12:00")'))
     assert_equal(3.67, parsec.eval_equation('hoursdiff("2019-02-01T08:20", "2019-02-01T12:00")'))
+    assert_equal(0, parsec.eval_equation('hoursdiff(current_date(), current_date())'))
+    assert_operator(parsec.eval_equation('hoursdiff(current_date(), "2000-01-01")'), :<, 0)
     assert_equal(0, parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-01")'))
     assert_equal(-20, parsec.eval_equation('hoursdiff("2018-01-02T08:00", "2018-01-01T12:00")'))
     assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff("2018-01-01", "INVALID2")') }
@@ -138,6 +148,7 @@ class TestParsec < Minitest::Test
     assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff(2, 3)') }
     assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-01T12:00")') }
     assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff("2018-01-01T12:00", "2018-01-01")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff(current_date(), "2010-01-01T08:30")') }
   end
 
   def test_eval_equation_with_type

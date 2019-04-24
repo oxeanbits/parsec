@@ -180,10 +180,13 @@ class TestParsec < Minitest::Test
     assert_equal('123-456', parsec.eval_equation('mask("000-000", 123456)'))
     assert_equal('00014', parsec.eval_equation('mask("00000", 14)'))
     assert_equal('000 14', parsec.eval_equation('mask("000 00", 14)'))
-    assert_equal('3-5591-1801', parsec.eval_equation('mask("0-0000-0000", 355911801)'))
     assert_equal('#123', parsec.eval_equation('concat("#", mask("000", 123))'))
     assert_equal('12345', parsec.eval_equation('mask("0000", 12345)'))
     assert_equal('123 45', parsec.eval_equation('mask("00 00", 12345)'))
+    assert_equal('3-5591-1801', parsec.eval_equation('mask("0-0000-0000", 355911801)'))
+    assert_equal('35-5591-1801', parsec.eval_equation('mask("00-0000-0000", 3555911801)'))
+    assert_equal('12-1234-1234-1234', parsec.eval_equation('mask("00-0000-0000-0000", 12123412341234)'))
+    assert_equal('1-1234-1234-1234-1234', parsec.eval_equation('mask("0-0000-0000-0000-0000", 11234123412341234)'))
   end
 
   def test_eval_equation_with_type

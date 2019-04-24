@@ -6,7 +6,7 @@ module Parsec
   class Parsec
     using StringToBooleanRefinements
 
-    VERSION = '0.6.4'.freeze
+    VERSION = '0.7.0'.freeze
 
     # evaluates the equation and returns only the result
     def self.eval_equation(equation)
@@ -56,7 +56,7 @@ module Parsec
       case ans['value']
       when 'inf' then return 'Infinity'
       when '-inf' then return '-Infinity'
-      when 'nan' then return ans['value']
+      when 'nan', '-nan' then return 'nan'
       end
 
       case ans['type']

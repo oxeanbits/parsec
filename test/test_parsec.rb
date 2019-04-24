@@ -115,8 +115,8 @@ class TestParsec < Minitest::Test
 
   def test_date_functions
     parsec = Parsec::Parsec
-    assert_equal(Date.today, Date.parse(parsec.eval_equation("current_date()")))
-    assert_match(/^\d{4}-\d{2}-\d{2}$/, parsec.eval_equation("current_date()"))
+    assert_equal(Date.today, Date.parse(parsec.eval_equation('current_date()')))
+    assert_match(/^\d{4}-\d{2}-\d{2}$/, parsec.eval_equation('current_date()'))
     assert_equal(364, parsec.eval_equation('daysdiff("2018-01-01", "2018-12-31")'))
     assert_equal(365, parsec.eval_equation('daysdiff("2016-01-01", "2016-12-31")'))
     assert_equal(365, parsec.eval_equation('daysdiff("2000-01-01", "2000-12-31")'))
@@ -151,6 +151,44 @@ class TestParsec < Minitest::Test
     assert_raises(SyntaxError) { parsec.eval_equation('hoursdiff(current_date(), "2010-01-01T08:30")') }
   end
 
+  def test_add_days
+    parsec = Parsec::Parsec
+
+    # With Dates
+    assert_equal('2019-01-01', parsec.eval_equation('add_days("2019-01-01", 0)'))
+    assert_equal('2019-01-02', parsec.eval_equation('add_days("2019-01-01", 1)'))
+    assert_equal('2018-12-31', parsec.eval_equation('add_days("2019-01-01", -1)'))
+    assert_equal('2019-01-04', parsec.eval_equation('add_days("2019-01-01", 3)'))
+
+    # # With DateTimes
+    assert_equal('2019-01-01T08:30', parsec.eval_equation('add_days("2019-01-01T08:30", 0)'))
+    assert_equal('2019-02-01T12:30', parsec.eval_equation('add_days("2019-01-01T12:30", 31)'))
+    assert_equal('2019-01-02T15:30', parsec.eval_equation('add_days("2019-01-01T15:30", 1)'))
+    assert_equal('2019-01-02T20:30', parsec.eval_equation('add_days("2019-01-01T08:30", 1.5)'))
+    assert_equal('2018-12-31T08:30', parsec.eval_equation('add_days("2019-01-01T08:30", -1)'))
+
+    # With Errors
+    assert_raises(SyntaxError) { parsec.eval_equation_with_type('add_days("2019-01-33", 0)') }
+    # assert_raises(SyntaxError) { parsec.eval_equation_with_type('add_days("2019-01-01T08:61", 0)') } # Dont work on Linux
+    assert_raises(SyntaxError) { parsec.eval_equation_with_type('add_days()') }
+    assert_raises(SyntaxError) { parsec.eval_equation_with_type('add_days(1, 2, 3)') }
+    assert_raises(SyntaxError) { parsec.eval_equation_with_type('add_days(1, 2)') }
+  end
+
+  def test_mask
+    parsec = Parsec::Parsec
+    assert_equal('123-456', parsec.eval_equation('mask("000-000", 123456)'))
+    assert_equal('00014', parsec.eval_equation('mask("00000", 14)'))
+    assert_equal('000 14', parsec.eval_equation('mask("000 00", 14)'))
+    assert_equal('#123', parsec.eval_equation('concat("#", mask("000", 123))'))
+    assert_equal('12345', parsec.eval_equation('mask("0000", 12345)'))
+    assert_equal('123 45', parsec.eval_equation('mask("00 00", 12345)'))
+    assert_equal('3-5591-1801', parsec.eval_equation('mask("0-0000-0000", 355911801)'))
+    assert_equal('35-5591-1801', parsec.eval_equation('mask("00-0000-0000", 3555911801)'))
+    assert_equal('12-1234-1234-1234', parsec.eval_equation('mask("00-0000-0000-0000", 12123412341234)'))
+    assert_equal('1-1234-1234-1234-1234', parsec.eval_equation('mask("0-0000-0000-0000-0000", 11234123412341234)'))
+  end
+
   def test_eval_equation_with_type
     parsec = Parsec::Parsec
     assert_equal({ value: 10, type: :int }, parsec.eval_equation_with_type('(5 + 1) + (6 - 2)'))
@@ -160,8 +198,8 @@ class TestParsec < Minitest::Test
     assert_equal({ value: 40.6853, type: :float }, parsec.eval_equation_with_type('10^log(3+2)'))
     assert_equal({ value: 5.1, type: :float }, parsec.eval_equation_with_type('number("5.1")'))
     equation_if = '4 > 2 ? "bigger" : "smaller"'
-    assert_equal({ value: "bigger", type: :string }, parsec.eval_equation_with_type(equation_if))
-    assert_equal({ value: "5.123", type: :string }, parsec.eval_equation_with_type('string(5.123)'))
+    assert_equal({ value: 'bigger', type: :string }, parsec.eval_equation_with_type(equation_if))
+    assert_equal({ value: '5.123', type: :string }, parsec.eval_equation_with_type('string(5.123)'))
     equation_boolean = '2 == 2 ? true : false'
     assert_equal({ value: true, type: :boolean }, parsec.eval_equation_with_type(equation_boolean))
     equation_boolean = '(3==3) and (3!=3)'

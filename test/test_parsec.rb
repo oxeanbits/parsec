@@ -168,7 +168,7 @@ class TestParsec < Minitest::Test
     assert_equal('2018-12-31T08:30', parsec.eval_equation('add_days("2019-01-01T08:30", -1)'))
 
     # With Errors
-    assert_raises(SyntaxError) { parsec.eval_equation_with_type('add_days("2019-01-99", 0)') }
+    assert_raises(SyntaxError) { parsec.eval_equation_with_type('add_days("2019-01-33", 0)') }
     assert_raises(SyntaxError) { parsec.eval_equation_with_type('add_days("2019-01-01T08:61", 0)') }
     assert_raises(SyntaxError) { parsec.eval_equation_with_type('add_days()') }
     assert_raises(SyntaxError) { parsec.eval_equation_with_type('add_days(1, 2, 3)') }

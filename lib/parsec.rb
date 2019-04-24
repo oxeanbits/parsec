@@ -56,7 +56,7 @@ module Parsec
       case ans['value']
       when 'inf' then return 'Infinity'
       when '-inf' then return '-Infinity'
-      when 'nan' then return ans['value']
+      when 'nan', '-nan' then return ans['value']
       end
 
       case ans['type']

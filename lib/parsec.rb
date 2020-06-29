@@ -15,7 +15,7 @@ module Parsec
 
     # evaluates the equation and returns the result and its data type
     def self.eval_equation_with_type(equation)
-      sanitize(equation, true)
+      equation = sanitize(equation, true)
 
       result = Libnativemath.native_eval(equation)
       { value: convert(result), type: result['type'].to_sym }
@@ -23,20 +23,20 @@ module Parsec
 
     # returns true or raise an error
     def self.validate_syntax!(equation)
-      sanitize(equation)
+      equation = sanitize(equation)
 
       validate(Libnativemath.native_eval(equation), true)
     end
 
     # returns true or an error string
     def self.validate_syntax(equation)
-      sanitize(equation)
+      equation = sanitize(equation)
 
       validate(Libnativemath.native_eval(equation), false)
     end
 
     def self.get_result_type(equation)
-      sanitize(equation, true)
+      equation = sanitize(equation, true)
 
       result = Libnativemath.native_eval(equation)
       result['type'].to_sym if validate(result, true)
@@ -45,11 +45,13 @@ module Parsec
     private_class_method
 
     def self.sanitize(equation, new_line = false)
-      equation.gsub!(/[\n\t\r]/, ' ')
+      equation = equation.gsub(/[\n\t\r]/, ' ')
 
       # The following regex remove all spaces that are not between quot marks
       # https://tinyurl.com/ybc7bng3
-      equation.gsub!(/( |(".*?"))/, '\\2') if new_line == true
+      equation = equation.gsub(/( |(".*?"))/, '\\2') if new_line == true
+
+      equation
     end
 
     def self.convert(ans)

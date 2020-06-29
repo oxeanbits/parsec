@@ -115,3 +115,4 @@ parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-01")')             # resu
 * Complex functions: **real**, **imag**, **conj**, **arg**, **norm**
 * Array functions: **sizeof**, **eye**, **ones**, **zeros**
 * Date functions: **current_date**, **daysdiff**, **hoursdiff**
+* Extra functions: **default_value**

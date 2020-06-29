@@ -14,7 +14,7 @@ gem 'parsecs'
 
 ```ruby
 gem build parsec.gemspec
-gem install ./parsecs-VERSION.gem (e.g.: gem install ./parsecs-0.7.0.gem)
+gem install ./parsecs-VERSION.gem (e.g.: gem install ./parsecs-0.8.0.gem)
 ruby -Ilib -Iext/libnativemath test/test_parsec.rb
 ```
 
@@ -115,3 +115,4 @@ parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-01")')             # resu
 * Complex functions: **real**, **imag**, **conj**, **arg**, **norm**
 * Array functions: **sizeof**, **eye**, **ones**, **zeros**
 * Date functions: **current_date**, **daysdiff**, **hoursdiff**
+* Extra functions: **default_value**

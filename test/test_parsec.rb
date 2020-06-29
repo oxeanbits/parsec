@@ -189,6 +189,26 @@ class TestParsec < Minitest::Test
     assert_equal('1-1234-1234-1234-1234', parsec.eval_equation('mask("0-0000-0000-0000-0000", 11234123412341234)'))
   end
 
+  def test_default_value
+    parsec = Parsec::Parsec
+
+    # Success Scenarios
+    assert_equal(10, parsec.eval_equation('default_value(10, 1)'))
+    assert_equal(1, parsec.eval_equation('default_value(NULL, 1)'))
+    assert_equal(10.4, parsec.eval_equation('default_value(10.4, 1.01)'))
+    assert_equal(1.01, parsec.eval_equation('default_value(NULL, 1.01)'))
+    assert_equal('filled', parsec.eval_equation('default_value("filled", "default")'))
+    assert_equal('default', parsec.eval_equation('default_value(NULL, "default")'))
+    assert_equal(false, parsec.eval_equation('default_value(false, true)'))
+    assert_equal(true, parsec.eval_equation('default_value(NULL, true)'))
+
+    # Error Scenarios
+    assert_raises(SyntaxError) { parsec.eval_equation('default_value(1, 4.5)') }
+    assert_raises(SyntaxError) { parsec.eval_equation('default_value(4.5, "string")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('default_value("string", true)') }
+    assert_raises(SyntaxError) { parsec.eval_equation('default_value(true, 1)') }
+  end
+
   def test_eval_equation_with_type
     parsec = Parsec::Parsec
     assert_equal({ value: 10, type: :int }, parsec.eval_equation_with_type('(5 + 1) + (6 - 2)'))

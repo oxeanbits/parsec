@@ -203,10 +203,10 @@ class TestParsec < Minitest::Test
     assert_equal(true, parsec.eval_equation('default_value(NULL, true)'))
 
     # Error Scenarios
-    assert_raises(SyntaxError) { parsec.eval_equation('default_value(1, 4.5') }
-    assert_raises(SyntaxError) { parsec.eval_equation('default_value(4.5, "string"') }
-    assert_raises(SyntaxError) { parsec.eval_equation('default_value("string", true') }
-    assert_raises(SyntaxError) { parsec.eval_equation('default_value(true, 1') }
+    assert_raises(SyntaxError) { parsec.eval_equation('default_value(1, 4.5)') }
+    assert_raises(SyntaxError) { parsec.eval_equation('default_value(4.5, "string")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('default_value("string", true)') }
+    assert_raises(SyntaxError) { parsec.eval_equation('default_value(true, 1)') }
   end
 
   def test_eval_equation_with_type

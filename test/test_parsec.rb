@@ -202,8 +202,17 @@ class TestParsec < Minitest::Test
     assert_equal(false, parsec.eval_equation('default_value(false, true)'))
     assert_equal(true, parsec.eval_equation('default_value(NULL, true)'))
 
+    # Mixing number types
+    assert_equal(1, parsec.eval_equation('default_value(1, 4.5)'))
+    assert_equal(1, parsec.eval_equation('default_value(1, 10)'))
+    assert_equal(1, parsec.eval_equation('default_value(1, 10.0)'))
+    assert_equal(1, parsec.eval_equation('default_value(1.0, 10)'))
+    assert_equal(1, parsec.eval_equation('default_value(1.0, 10.0)'))
+    assert_equal(1.5, parsec.eval_equation('default_value(1.5, 10)'))
+    assert_equal(1.5, parsec.eval_equation('default_value(1.5, 10.0)'))
+    assert_equal(1.5, parsec.eval_equation('default_value(1.5, 10.5)'))
+
     # Error Scenarios
-    assert_raises(SyntaxError) { parsec.eval_equation('default_value(1, 4.5)') }
     assert_raises(SyntaxError) { parsec.eval_equation('default_value(4.5, "string")') }
     assert_raises(SyntaxError) { parsec.eval_equation('default_value("string", true)') }
     assert_raises(SyntaxError) { parsec.eval_equation('default_value(true, 1)') }

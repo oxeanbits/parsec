@@ -60,6 +60,12 @@ class TestParsec < Minitest::Test
     assert_equal(5, parser.eval_equation('number("5")'))
     assert_equal('Hello', parser.eval_equation('left("Hello World", 5)'))
     assert_equal('World', parser.eval_equation('right("Hello World", 5)'))
+    assert_equal('<a href=\"http://foo.bar\">Title</a>', parser.eval_equation('link("Title", "http://foo.bar")'))
+    assert_equal('<a href=\"#\">Title</a>', parser.eval_equation('link("Title", "#")'))
+    assert_equal('<a href=\"/test\">Test title</a>', parser.eval_equation('link("Test title", "/test")'))
+    assert_raises(SyntaxError) { parser.eval_equation_with_type('link()') }
+    assert_raises(SyntaxError) { parser.eval_equation_with_type('link(1, 2, 3)') }
+    assert_raises(SyntaxError) { parser.eval_equation_with_type('link(1, "2")') }
   end
 
   def test_complex_string_manipulation

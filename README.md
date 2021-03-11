@@ -14,7 +14,7 @@ gem 'parsecs'
 
 ```ruby
 gem build parsec.gemspec
-gem install ./parsecs-VERSION.gem (e.g.: gem install ./parsecs-0.9.0.gem)
+gem install ./parsecs-VERSION.gem (e.g.: gem install ./parsecs-0.9.1.gem)
 ruby -Ilib -Iext/libnativemath test/test_parsec.rb
 ```
 
@@ -86,7 +86,7 @@ parser.eval_equation('length("test string")')     # result => 11
 parser.eval_equation('toupper("test string")')    # result => "TEST STRING"
 parser.eval_equation('tolower("TEST STRING")')    # result => "test string"
 parser.eval_equation('concat("Hello ", "World")') # result => "Hello World"
-parser.eval_equation('link("Title", "http://foo.bar")') # result => "<a href=\"http://foo.bar\">Title</a>"
+parser.eval_equation('link("Title", "http://foo.bar")') # result => "<a href="http://foo.bar">Title</a>"
 parser.eval_equation('str2number("5")')           # result => 5
 parser.eval_equation('left("Hello World", 5)')    # result => "Hello"
 parser.eval_equation('right("Hello World", 5)')   # result => "World"

@@ -195,6 +195,15 @@ class TestParsec < Minitest::Test
     assert_equal('1-1234-1234-1234-1234', parsec.eval_equation('mask("0-0000-0000-0000-0000", 11234123412341234)'))
   end
 
+  def test_string_cast
+    parsec = Parsec::Parsec
+    assert_equal('4', parsec.eval_equation('string(4)'))
+    assert_equal('4.5', parsec.eval_equation('string(4.5)'))
+    assert_equal('true', parsec.eval_equation('string(true)'))
+    assert_equal('false', parsec.eval_equation('string(false)'))
+    assert_equal('4', parsec.eval_equation('string("4")'))
+  end
+
   def test_default_value
     parsec = Parsec::Parsec
 

@@ -204,6 +204,15 @@ class TestParsec < Minitest::Test
     assert_equal('4', parsec.eval_equation('string("4")'))
   end
 
+  def test_number_cast
+    parsec = Parsec::Parsec
+    assert_equal(4, parsec.eval_equation('number(4)'))
+    assert_equal(4.5, parsec.eval_equation('number(4.5)'))
+    assert_equal(1, parsec.eval_equation('number(true)'))
+    assert_equal(0, parsec.eval_equation('number(false)'))
+    assert_equal(4, parsec.eval_equation('number("4")'))
+  end
+
   def test_default_value
     parsec = Parsec::Parsec
 

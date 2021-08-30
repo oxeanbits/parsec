@@ -272,4 +272,21 @@ class TestParsec < Minitest::Test
     assert_raises(SyntaxError) { parsec.eval_equation_with_type('concat(1, 2)') }
     assert_raises(SyntaxError) { parsec.eval_equation_with_type('4 > 2 ? "smaller"') }
   end
+
+  def test_timediff
+    parsec = Parsec::Parsec
+    assert_equal(1.5, parsec.eval_equation('timediff("02:00:00", "03:30:00")'))
+    assert_equal(22.5, parsec.eval_equation('timediff("03:30:00", "02:00:00")'))
+    assert_equal(0.01, parsec.eval_equation('timediff("02:00:00", "02:00:30")'))
+    assert_equal(23.99, parsec.eval_equation('timediff("02:00:30", "02:00:00")'))
+    assert_equal(0.0, parsec.eval_equation('timediff("02:00:00", "02:00:00")'))
+
+    # error scenarios
+    assert_raises(SyntaxError) { parsec.eval_equation('timediff("02:00:30", "02/01/20")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('timediff("02:00:30", "02/01/20T02:00:30")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('timediff("02/01/20", "02:00:30")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('timediff("02:00:30", "02:61:30")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('timediff("02:00:00", "02:30:62")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('timediff("24:00:00", "02:30:59")') }
+  end
 end

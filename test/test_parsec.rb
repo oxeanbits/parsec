@@ -84,6 +84,7 @@ class TestParsec < Minitest::Test
     assert_equal('test lowercase', parser.eval_equation('tolower("TEST LOWERCASE")'))
     assert_equal('Hello', parser.eval_equation('left("Hello World", 5)'))
     assert_equal('World', parser.eval_equation('right("Hello World", 5)'))
+    assert_equal('Hello World', parser.eval_equation('right("Hello World", 20)'))
   end
 
   def test_general_equations

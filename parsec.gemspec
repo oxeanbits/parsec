@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.require_paths         = ['lib', 'ext/libnativemath', '.']
   s.required_ruby_version = '>= 2.0'
   s.license               = 'MIT'
-  s.requirements          << 'swig'
+  s.requirements          << 'swig' # >= 4.0.2
   s.requirements          << 'cmake'
 
   s.add_development_dependency 'minitest', '~> 5.10'

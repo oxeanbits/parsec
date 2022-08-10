@@ -6,7 +6,7 @@ module Parsec
   class Parsec
     using StringToBooleanRefinements
 
-    VERSION = '0.11.1'.freeze
+    VERSION = '0.11.2'.freeze
 
     # evaluates the equation and returns only the result
     def self.eval_equation(equation)
@@ -65,7 +65,7 @@ module Parsec
       when 'int'     then return ans['value'].to_i
       when 'float'   then return ans['value'].to_f
       when 'boolean' then return ans['value'].to_bool
-      when 'string'  then return error_check(ans['value'])
+      when 'string'  then return error_check(ans['value'].force_encoding(Encoding::UTF_8))
       when 'complex' then return 'complex number' # Maybe future implementation
       when 'matrix'  then return 'matrix value'   # Maybe future implementation
       end

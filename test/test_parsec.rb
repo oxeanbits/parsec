@@ -70,6 +70,7 @@ class TestParsec < Minitest::Test
     assert_equal(false, parser.eval_equation('contains("1234567", "789")'))
     assert_equal(true, parser.eval_equation('contains("2019-01-01T:08:30", "2019-01-01")'))
     assert_equal(false, parser.eval_equation('contains("2019-01-01T:08:30", "2021-01-01")'))
+    assert_equal('Maçã', parser.eval_equation('"Maçã"'))
     assert_raises(SyntaxError) { parser.eval_equation('contains(1234567, "789")') }
     assert_raises(SyntaxError) { parser.eval_equation('contains("hello", 2.2)') }
     assert_raises(SyntaxError) { parser.eval_equation_with_type('link()') }

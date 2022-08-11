@@ -100,15 +100,15 @@ parser.eval_equation('right("Hello World", 5)')   # result => "World"
 parser.eval_equation('number("5")')               # result => 5
 
 # Date equations (return the difference in days)
-parsec.eval_equation("current_date()"))                        # result => "2018-10-03"
-parsec.eval_equation('daysdiff(current_date(), "2018-10-04")') # result => 1
-parsec.eval_equation('daysdiff("2018-01-01", "2018-12-31")')   # result => 364
+parser.eval_equation("current_date()"))                        # result => "2018-10-03"
+parser.eval_equation('daysdiff(current_date(), "2018-10-04")') # result => 1
+parser.eval_equation('daysdiff("2018-01-01", "2018-12-31")')   # result => 364
 
 # DateTime equations (return the difference in hours)
-parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-02")')             # result => 24
-parsec.eval_equation('hoursdiff("2019-02-01T08:00", "2019-02-01T12:00")') # result => 4
-parsec.eval_equation('hoursdiff("2019-02-01T08:20", "2019-02-01T12:00")') # result => 3.67
-parsec.eval_equation('hoursdiff("2018-01-01", "2018-01-01")')             # result => 0
+parser.eval_equation('hoursdiff("2018-01-01", "2018-01-02")')             # result => 24
+parser.eval_equation('hoursdiff("2019-02-01T08:00", "2019-02-01T12:00")') # result => 4
+parser.eval_equation('hoursdiff("2019-02-01T08:20", "2019-02-01T12:00")') # result => 3.67
+parser.eval_equation('hoursdiff("2018-01-01", "2018-01-01")')             # result => 0
 ```
 
 ### The following functions can be used

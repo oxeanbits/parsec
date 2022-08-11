@@ -2,6 +2,13 @@
 
 A parser for Math equations using a lighter, faster and more complete version of muparserx C++ library
 
+
+## Requirements
+
+1. `swig` >= 4.0.2
+2. `cmake`
+
+
 ## Usage
 
 #### Add to your `Gemfile`

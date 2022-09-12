@@ -49,7 +49,7 @@ module Parsec
 
       # The following regex remove all spaces that are not between quot marks
       # https://tinyurl.com/ybc7bng3
-      equation = equation.gsub(/( |(".*?"))/, '\\2') if new_line == true
+      equation = equation.gsub(/( |(".*?[^\\]"))/, '\\2') if new_line == true
 
       equation
     end

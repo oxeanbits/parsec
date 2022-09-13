@@ -56,6 +56,7 @@ class TestParsec < Minitest::Test
     assert_equal('TEST STRING', parser.eval_equation('toupper("test string")'))
     assert_equal('test string', parser.eval_equation('tolower("TEST STRING")'))
     assert_equal('Hello World', parser.eval_equation('concat("Hello ", "World")'))
+    assert_equal('tes t "str \" " ing equa  "   tion', parser.eval_equation('concat(concat("tes t", " \\"str \\\\\" \\" ing "),string("equa  \\"   tion"))'))
     assert_equal(5, parser.eval_equation('str2number("5")'))
     assert_equal(5, parser.eval_equation('number("5")'))
     assert_equal('Hello', parser.eval_equation('left("Hello World", 5)'))

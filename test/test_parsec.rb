@@ -64,6 +64,7 @@ class TestParsec < Minitest::Test
     assert_equal('<a href="http://foo.bar">Title</a>', parser.eval_equation('link("Title", "http://foo.bar")'))
     assert_equal('<a href="#">Title</a>', parser.eval_equation('link("Title", "#")'))
     assert_equal('<a href="/test">Test title</a>', parser.eval_equation('link("Test title", "/test")'))
+    assert_equal('<a href="/test" download="testFileName">Test title</a>', parser.eval_equation('link("Test title", "/test", "testFileName")'))
     assert_equal(true, parser.eval_equation('contains("Hello World", "orld")'))
     assert_equal(true, parser.eval_equation('contains("One Flew Over The Cuckoo\'s", "koo")'))
     assert_equal(false, parser.eval_equation('contains("Hello World", "Worlds")'))
@@ -75,8 +76,10 @@ class TestParsec < Minitest::Test
     assert_raises(SyntaxError) { parser.eval_equation('contains(1234567, "789")') }
     assert_raises(SyntaxError) { parser.eval_equation('contains("hello", 2.2)') }
     assert_raises(SyntaxError) { parser.eval_equation_with_type('link()') }
+    assert_raises(SyntaxError) { parser.eval_equation_with_type('link("1")') }
     assert_raises(SyntaxError) { parser.eval_equation_with_type('link(1, 2, 3)') }
     assert_raises(SyntaxError) { parser.eval_equation_with_type('link(1, "2")') }
+    assert_raises(SyntaxError) { parser.eval_equation_with_type('link("1","2","3","4")') }
   end
 
   def test_complex_string_manipulation

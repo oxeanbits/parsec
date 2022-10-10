@@ -6,7 +6,7 @@ module Parsec
   class Parsec
     using StringToBooleanRefinements
 
-    VERSION = '0.11.4'.freeze
+    VERSION = '0.11.5'.freeze
 
     # evaluates the equation and returns only the result
     def self.eval_equation(equation)
@@ -49,7 +49,7 @@ module Parsec
 
       # The following regex remove all spaces that are not between quot marks
       # https://tinyurl.com/ybc7bng3
-      equation = equation.gsub(/( |(".*?[^\\]"))/, '\\2') if new_line == true
+      equation = equation.gsub(/( |(".*?[^\\]"))/, '\\0') if new_line == true
 
       equation
     end

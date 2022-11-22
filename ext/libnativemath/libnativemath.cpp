@@ -48,6 +48,6 @@ int native_eval(string input, char *value, char *value_type) {
 
   value_type[0] = ans.GetType();
 
-  strcpy(value, ans.ToString().c_str());
+  strcpy(value, ans.AsString().c_str());
   return 0;
 }

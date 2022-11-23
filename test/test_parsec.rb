@@ -13,6 +13,11 @@ class TestParsec < Minitest::Test
     parser = Parsec::Parsec
     assert_equal(10, parser.eval_equation('(5 + 1) + (6 - 2)'))
     assert_equal(16, parser.eval_equation('4 + 4 * 3'))
+    assert_equal(604.1952, parser.eval_equation('35.52 * 17.01'))
+    assert_equal(404.5728, parser.eval_equation('35.52 * 11.39'))
+    assert_equal(634.2688, parser.eval_equation('11.84 * 53.57'))
+    assert_equal(423.3984, parser.eval_equation('11.84 * 35.76'))
+    assert_equal(309.96528, parser.eval_equation('(604.1952 + 404.5728 + 634.2688 + 423.3984) * 0.15'))
     assert_equal(2, parser.eval_equation('10.5 / 5.25'))
     assert_equal(5, parser.eval_equation('abs(-5)'))
     assert_equal(1, parser.eval_equation('log10(10)'))

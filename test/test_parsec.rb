@@ -13,6 +13,11 @@ class TestParsec < Minitest::Test
     parser = Parsec::Parsec
     assert_equal(10, parser.eval_equation('(5 + 1) + (6 - 2)'))
     assert_equal(16, parser.eval_equation('4 + 4 * 3'))
+    assert_equal(604.1952, parser.eval_equation('35.52 * 17.01'))
+    assert_equal(404.5728, parser.eval_equation('35.52 * 11.39'))
+    assert_equal(634.2688, parser.eval_equation('11.84 * 53.57'))
+    assert_equal(423.3984, parser.eval_equation('11.84 * 35.76'))
+    assert_equal(309.96528, parser.eval_equation('(604.1952 + 404.5728 + 634.2688 + 423.3984) * 0.15'))
     assert_equal(2, parser.eval_equation('10.5 / 5.25'))
     assert_equal(5, parser.eval_equation('abs(-5)'))
     assert_equal(1, parser.eval_equation('log10(10)'))
@@ -25,8 +30,8 @@ class TestParsec < Minitest::Test
   def test_complex_math_equations
     parser = Parsec::Parsec
     assert_equal(6, parser.eval_equation('sqrt(16) + cbrt(8)'))
-    assert_equal(4.30259, parser.eval_equation('log10(10) + ln(e) + log(10)'))
-    assert_equal(2.0, parser.eval_equation('sin(1) + cos(0) + tan(0.15722)'))
+    assert_equal(4.30258509299405, parser.eval_equation('log10(10) + ln(e) + log(10)'))
+    assert_equal(1.99999931685569, parser.eval_equation('sin(1) + cos(0) + tan(0.15722)'))
     assert_equal(16, parser.eval_equation('max(1, 2) + min(3, 4) + sum(5, 6)'))
     assert_equal(9.6, parser.eval_equation('avg(9, 9.8, 10)'))
     assert_equal(8, parser.eval_equation('pow(2, 3)'))
@@ -97,7 +102,7 @@ class TestParsec < Minitest::Test
   def test_general_equations
     parsec = Parsec::Parsec
     assert_equal(1, parsec.eval_equation('((0.09/1.0)+2.58)-1.67'))
-    assert_equal(40.6853, parsec.eval_equation('10^log(3+2)'))
+    assert_equal(40.6853365119738, parsec.eval_equation('10^log(3+2)'))
     assert_equal(1, parsec.eval_equation('log(e)'))
     assert_equal(2, parsec.eval_equation('2^5^0'))
     assert_equal('yes', parsec.eval_equation('5 > 3 ? "yes" : "no"'))
@@ -265,7 +270,7 @@ class TestParsec < Minitest::Test
     assert_equal({ value: 362_880_0, type: :int }, parsec.eval_equation_with_type('10!'))
     equation_date = 'daysdiff("2018-01-01", "2017-12-31")'
     assert_equal({ value: 1, type: :int }, parsec.eval_equation_with_type(equation_date))
-    assert_equal({ value: 40.6853, type: :float }, parsec.eval_equation_with_type('10^log(3+2)'))
+    assert_equal({ value: 40.6853365119738, type: :float }, parsec.eval_equation_with_type('10^log(3+2)'))
     assert_equal({ value: 5.1, type: :float }, parsec.eval_equation_with_type('number("5.1")'))
     equation_if = '4 > 2 ? "bigger" : "smaller"'
     assert_equal({ value: 'bigger', type: :string }, parsec.eval_equation_with_type(equation_if))

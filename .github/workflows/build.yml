@@ -39,7 +39,7 @@ jobs:
         id: build
         run: |
           gem build parsec.gemspec
-          gem install ./parsecs-*.gem
+          gem install ./parsecs-*.gem --verbose
 
       - name: Tests
         id: tests

@@ -1,5 +1,7 @@
 # Parsec
 
+[![CI](https://github.com/oxeanbits/parsec/actions/workflows/build.yml/badge.svg)](https://github.com/oxeanbits/parsec/actions/workflows/build.yml)
+
 A parser for Math equations using a lighter, faster and more complete version of muparserx C++ library
 
 

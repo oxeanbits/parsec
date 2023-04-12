@@ -64,10 +64,17 @@ unless File.exist?("#{MUPARSER_LIB}/libmuparserx.a")
   abort 'libmuparserx.a is missing.'
 end
 
-create_makefile('ext/libnativemath/libnativemath')
+if RUBY_VERSION >= '3.2'
+  create_makefile('../ext/libnativemath')
+else
+  create_makefile('ext/libnativemath/libnativemath')
+end
 
 Dir.chdir(BASEDIR) do
   Dir.chdir('ext/libnativemath/') do
     system('make')
+    if RUBY_VERSION >= '3.2'
+      FileUtils.cp('libnativemath.so', '../../lib/')
+    end
   end
 end

@@ -35,9 +35,13 @@ jobs:
         run: |
           bundle install -j 5
 
-      - name: Tests
-        id: tests
+      - name: Build
+        id: build
         run: |
           gem build parsec.gemspec
           gem install ./parsecs-*.gem
+
+      - name: Tests
+        id: tests
+        run: |
           ruby -Ilib -Iext/libnativemath test/test_parsec.rb

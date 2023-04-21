@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   s.name                  = 'parsecs'
-  s.version               = '0.11.9'
+  s.version               = '0.12.0'
   s.platform              = Gem::Platform::RUBY
   s.authors               = ['Nilton Vasques', 'Victor Cordeiro', 'Beatriz Fagundes']
   s.email                 = ['nilton.vasques@gmail.com', 'victorcorcos@gmail.com', 'beatrizsfslima@gmail.com']
-  s.description           = 'ParseCs is a gem to evaluate equations using a lighter and extented version of the muparserx C++ library'
-  s.homepage              = 'https://github.com/niltonvasques/parsec'
+  s.description           = 'Parsecs is a gem to evaluate equations using a lighter and extented version of the muparserx C++ library'
+  s.homepage              = 'https://github.com/oxeanbits/parsec'
   s.summary               = 'A gem to evaluate equations using muparserx C++ library'
   s.files                 = ['lib/parsec.rb', 'lib/string_to_boolean_refinements.rb', 'ext/libnativemath/libnativemath.i',
                              'ext/libnativemath/libnativemath.cpp', 'ext/libnativemath/libnativemath.h']

@@ -302,4 +302,40 @@ class TestParsec < Minitest::Test
     assert_raises(SyntaxError) { parsec.eval_equation('timediff("02:00:00", "02:30:62")') }
     assert_raises(SyntaxError) { parsec.eval_equation('timediff("24:00:00", "02:30:59")') }
   end
+
+  def test_regex
+    parsec = Parsec::Parsec
+    assert_equal('World', parsec.eval_equation('regex("Hello World", "Hello (.*)")'))
+    assert_equal('71', parsec.eval_equation('regex("71 123456789", "([0-9]{2}) [0-9]{9}")'))
+    assert_equal('ISSUE-123', parsec.eval_equation('regex("ISSUE-123 Fix bug", "(ISSUE-[0-9]+) (.*)")'))
+    assert_equal('2019-01-01', parsec.eval_equation('regex("2019-01-01T:08:30", "([0-9]{4}-[0-9]{2}-[0-9]{2})T:[0-9]{2}:[0-9]{2}")'))
+    assert_equal('2019-01', parsec.eval_equation('regex("2019-01-01T:08:30", "([0-9]{4}-[0-9]{2})-[0-9]{2}T:[0-9]{2}:[0-9]{2}")'))
+    assert_equal('2019', parsec.eval_equation('regex("2019-01-01T:08:30", "([0-9]{4})-[0-9]{2}-[0-9]{2}T:[0-9]{2}:[0-9]{2}")'))
+    # Regex tests with no capture group
+    assert_equal('', parsec.eval_equation('regex("Hello World", "Hello .*")'))
+
+    # Regex tests with optional groups
+    assert_equal('1234', parsec.eval_equation('regex("Product 1234 (color: red)", "Product ([0-9]+)( \\\\(color: (.*)\\\\))?")'))
+    assert_equal('1234', parsec.eval_equation('regex("Product 1234", "Product ([0-9]+)( \\\\(color: (.*)\\\\))?")'))
+
+    # Regex tests with alternation
+    assert_equal('Green', parsec.eval_equation('regex("Green Apple", "(Green|Red) Apple")'))
+    assert_equal('Red', parsec.eval_equation('regex("Red Apple", "(Green|Red) Apple")'))
+
+    # Regex tests with character classes
+    assert_equal('A123', parsec.eval_equation('regex("BoxA123", "Box([A-Za-z][0-9]+)")'))
+    assert_equal('C456', parsec.eval_equation('regex("BoxC456", "Box([A-Za-z][0-9]+)")'))
+
+    # Regex tests with positive lookaheads
+    assert_equal('apple', parsec.eval_equation('regex("apple123banana", "([a-z]+)(?=\\\\d+)")'))
+
+    assert_equal('456', parsec.eval_equation('regex("123red456blue", "(\\\\d+)(?=blue)")'))
+
+    # Regex tests with negative lookaheads
+    assert_equal('123', parsec.eval_equation('regex("123red456blue", "(\\\\d+)(?!blue)")'))
+
+    # Regex tests with nested lookaheads
+    assert_equal('apple', parsec.eval_equation('regex("apple123redbanana", "(?=apple)([a-z]+)(?=\\\\d+red)")'))
+    assert_equal('apple', parsec.eval_equation('regex("apple123red456banana", "(?=apple)([a-z]+)(?=(\\\\d+red)\\\\d+banana)")'))
+  end
 end

@@ -338,4 +338,38 @@ class TestParsec < Minitest::Test
     assert_equal('apple', parsec.eval_equation('regex("apple123redbanana", "(?=apple)([a-z]+)(?=\\\\d+red)")'))
     assert_equal('apple', parsec.eval_equation('regex("apple123red456banana", "(?=apple)([a-z]+)(?=(\\\\d+red)\\\\d+banana)")'))
   end
+
+  def test_weekyear
+    parsec = Parsec::Parsec
+
+    # Week number of the year when 1st of January is a Sunday
+    assert_equal(1, parsec.eval_equation('weekyear("2023-01-01")'))
+    assert_equal(1, parsec.eval_equation('weekyear("2023-01-07")'))
+    assert_equal(2, parsec.eval_equation('weekyear("2023-01-08")'))
+
+    assert_equal(17, parsec.eval_equation('weekyear("2023-04-25")'))
+    assert_equal(17, parsec.eval_equation('weekyear("2023-04-29")'))
+    assert_equal(18, parsec.eval_equation('weekyear("2023-04-30")'))
+    assert_equal(18, parsec.eval_equation('weekyear("2023-05-06")'))
+
+    assert_equal(52, parsec.eval_equation('weekyear("2023-12-24")'))
+    assert_equal(53, parsec.eval_equation('weekyear("2023-12-31")'))
+
+    # Week number of the year a leap year
+    assert_equal(1, parsec.eval_equation('weekyear("2024-01-01")'))
+    assert_equal(1, parsec.eval_equation('weekyear("2024-01-06")'))
+    assert_equal(2, parsec.eval_equation('weekyear("2024-01-07")'))
+
+    assert_equal(52, parsec.eval_equation('weekyear("2024-12-22")'))
+    assert_equal(53, parsec.eval_equation('weekyear("2024-12-29")'))
+
+    # Week number of the year when 1st of January is friday
+    assert_equal(53, parsec.eval_equation('weekyear("2027-01-01")'))
+    assert_equal(53, parsec.eval_equation('weekyear("2027-01-02")'))
+    assert_equal(1, parsec.eval_equation('weekyear("2027-01-03")'))
+
+    assert_equal(52, parsec.eval_equation('weekyear("2027-12-27")'))
+    assert_equal(52, parsec.eval_equation('weekyear("2027-12-31")'))
+    assert_equal(53, parsec.eval_equation('weekyear("2028-01-01")'))
+  end
 end

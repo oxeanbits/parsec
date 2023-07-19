@@ -73,7 +73,8 @@ end
 Dir.chdir(BASEDIR) do
   Dir.chdir('ext/libnativemath/') do
     system('make')
-    next if OSTYPE.match? 'darwin'
+
+    next if RUBY_PLATFORM.match? 'darwin'
 
     if RUBY_VERSION >= '3.2'
       FileUtils.cp('libnativemath.so', '../../lib/')

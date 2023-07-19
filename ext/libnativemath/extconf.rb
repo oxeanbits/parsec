@@ -57,11 +57,11 @@ Dir.chdir(BASEDIR) do
 end
 
 unless File.exist?("#{MUPARSER_HEADERS}/mpParser.h")
-  abort 'mpParser.h header is missing.'
+  abort 'mpParser.h header is missing!'
 end
 
 unless File.exist?("#{MUPARSER_LIB}/libmuparserx.a")
-  abort 'libmuparserx.a is missing.'
+  abort 'libmuparserx.a is missing!'
 end
 
 if RUBY_VERSION >= '3.2'
@@ -73,6 +73,8 @@ end
 Dir.chdir(BASEDIR) do
   Dir.chdir('ext/libnativemath/') do
     system('make')
+
+    next if RUBY_PLATFORM.match? 'darwin'
 
     if RUBY_VERSION >= '3.2'
       FileUtils.cp('libnativemath.so', '../../lib/')

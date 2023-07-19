@@ -64,7 +64,7 @@ unless File.exist?("#{MUPARSER_LIB}/libmuparserx.a")
   abort 'libmuparserx.a is missing.'
 end
 
-if RUBY_VERSION >= '3.2' and RUBY_PLATFORM.match? 'linux'
+if RUBY_VERSION >= '3.2'
   create_makefile('../ext/libnativemath')
 else
   create_makefile('ext/libnativemath/libnativemath')

@@ -6,7 +6,7 @@ module Parsec
   class Parsec
     using StringToBooleanRefinements
 
-    VERSION = '0.11.9'.freeze
+    VERSION = '0.13.1'.freeze
 
     # evaluates the equation and returns only the result
     def self.eval_equation(equation)

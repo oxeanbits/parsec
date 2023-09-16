@@ -1,9 +1,12 @@
-# Parsec
+<p align="center">
+  <img src="https://i.imgur.com/KsGTXDz.png" alt="Parsec Logo" width="200" height="200"/>
+</p>
+
+<p align="center">
+Parsec, a parser for Math equations using a lighter, faster and more complete version of muparserx C++ library
+</p>
 
 [![CI](https://github.com/oxeanbits/parsec/actions/workflows/build.yml/badge.svg)](https://github.com/oxeanbits/parsec/actions/workflows/build.yml)
-
-A parser for Math equations using a lighter, faster and more complete version of muparserx C++ library
-
 
 ## Requirements
 

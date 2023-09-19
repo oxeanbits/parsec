@@ -1,8 +1,16 @@
-# Parsec
+<p align="center">
+  <img src="https://i.imgur.com/Tq76GiK.png" alt="Parsec Logo" width="200" height="200"/>
+</p>
 
-[![CI](https://github.com/oxeanbits/parsec/actions/workflows/build.yml/badge.svg)](https://github.com/oxeanbits/parsec/actions/workflows/build.yml)
+<p align="center">
+  Parsec: A parser for Math equations using a lighter, faster and more complete version of muparserx C++ library
+</p>
 
-A parser for Math equations using a lighter, faster and more complete version of muparserx C++ library
+## Overview
+
+Welcome to the Equation Evaluator repository – a powerful and flexible tool for evaluating a wide range of equations on the fly. Whether it's simple arithmetic or complex calculations involving logarithms and custom functions like `concat()`, `sum()`, `avg()`, `mask()`, `left()`, `right()`, this repository has you covered.
+
+Our goal is to provide a reliable and efficient equation evaluation solution, capable of handling various mathematical and custom functions that can be seamlessly integrated into your existing systems. This README will walk you through the features, capabilities, and potential applications of our Equation Evaluator.
 
 
 ## Requirements

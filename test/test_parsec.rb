@@ -372,4 +372,23 @@ class TestParsec < Minitest::Test
     assert_equal(52, parsec.eval_equation('weekyear("2027-12-31")'))
     assert_equal(53, parsec.eval_equation('weekyear("2028-01-01")'))
   end
+
+  def test_calculate
+    parsec = Parsec::Parsec
+    assert_equal('World', parsec.eval_equation('regex("Hello World", "Hello (.*)")'))
+    assert_equal('12', parsec.eval_equation('calculate("2+2+2*4")'))
+    assert_equal('16', parsec.eval_equation('calculate("(2+2)*4")'))
+    assert_equal('16', parsec.eval_equation('calculate("2^4")'))
+    assert_equal('3', parsec.eval_equation('calculate("sqrt(9)")'))
+    assert_equal('50', parsec.eval_equation('calculate("abs(-50)")'))
+    assert_equal('1', parsec.eval_equation('calculate("round(1.123)")'))
+    assert_equal('2019-01-04', parsec.eval_equation('calculate("add_days(\"2019-01-01\", 3)")'))
+    assert_equal('1', parsec.eval_equation('calculate("daysdiff(\"2019-01-01\", \"2019-01-02\")")'))
+    assert_equal('24', parsec.eval_equation('calculate("hoursdiff(\"2019-01-01\", \"2019-01-02\")")'))
+    assert_equal('higher', parsec.eval_equation('calculate("3 > 2 ? \"higher\" : \"lower\"")'))
+    assert_equal('lower', parsec.eval_equation('calculate("3 < 2 ? \"higher\" : \"lower\"")'))
+    assert_equal('One Two Three', parsec.eval_equation('calculate("concat(\"One \", concat(\"Two\", \" Three\"))")'))
+    assert_equal('One Two Three', parsec.eval_equation('calculate("\"One\" // \" \" // \"Two\" // \" \" // \"Three\"")'))
+    assert_equal('3', parsec.eval_equation('calculate("number(calculate(\"1 + 1\")) + 1")'))
+  end
 end

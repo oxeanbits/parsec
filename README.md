@@ -119,6 +119,22 @@ parser.eval_equation('hoursdiff("2018-01-01", "2018-01-02")')             # resu
 parser.eval_equation('hoursdiff("2019-02-01T08:00", "2019-02-01T12:00")') # result => 4
 parser.eval_equation('hoursdiff("2019-02-01T08:20", "2019-02-01T12:00")') # result => 3.67
 parser.eval_equation('hoursdiff("2018-01-01", "2018-01-01")')             # result => 0
+
+# Calculate a string as an equation
+parser.eval_equation('calculate("2+2+2*4)"')                                           # result => "12"
+parser.eval_equation('calculate("(2+2)*4)"')                                           # result => "16"
+parser.eval_equation('calculate("2^4)"')                                               # result => "16"
+parser.eval_equation('calculate("sqrt(9))"')                                           # result => "3"
+parser.eval_equation('calculate("abs(-50))"')                                          # result => "50"
+parser.eval_equation('calculate("round(1.123))"')                                      # result => "1"
+parser.eval_equation('calculate("add_days(\"2019-01-01\", 3))"')                       # result => "2019-01-04"
+parser.eval_equation('calculate("daysdiff(\"2019-01-01\", \"2019-01-02\"))"')          # result => "1"
+parser.eval_equation('calculate("hoursdiff(\"2019-01-01\", \"2019-01-02\"))"')         # result => "24"
+parser.eval_equation('calculate("3 > 2 ? \"higher\" : \"lower\")"')                    # result => "higher"
+parser.eval_equation('calculate("3 < 2 ? \"higher\" : \"lower\")"')                    # result => "lower"
+parser.eval_equation('calculate("concat(\"One \", concat(\"Two\", \" Three\")))"')     # result => "One Two Three"
+parser.eval_equation('calculate("\"One\" // \" \" // \"Two\" // \" \" // \"Three\")"') # result => "One Two Three"
+parser.eval_equation('calculate("number(calculate(\"1 + 1\")) + 1)"')                  # result => "3"
 ```
 
 ### The following functions can be used

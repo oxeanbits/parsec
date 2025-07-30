@@ -77,7 +77,7 @@ Dir.chdir(BASEDIR) do
     # Copy extension file to lib directory for all platforms
     if RUBY_VERSION >= '3.2'
       if RUBY_PLATFORM.match? 'darwin'
-        FileUtils.cp('../ext/libnativemath.bundle', '../../lib/libnativemath.bundle')
+        FileUtils.cp('libnativemath.bundle', '../../lib/libnativemath.bundle')
       else
         FileUtils.cp('libnativemath.so', '../../lib/')
       end

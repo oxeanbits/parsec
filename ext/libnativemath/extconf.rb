@@ -74,10 +74,13 @@ Dir.chdir(BASEDIR) do
   Dir.chdir('ext/libnativemath/') do
     system('make')
 
-    next if RUBY_PLATFORM.match? 'darwin'
-
+    # Copy extension file to lib directory for all platforms
     if RUBY_VERSION >= '3.2'
-      FileUtils.cp('libnativemath.so', '../../lib/')
+      if RUBY_PLATFORM.match? 'darwin'
+        FileUtils.cp('ext/libnativemath.bundle', '../../lib/libnativemath.bundle')
+      else
+        FileUtils.cp('libnativemath.so', '../../lib/')
+      end
     end
   end
 end

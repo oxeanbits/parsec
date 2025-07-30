@@ -37,8 +37,8 @@ libs.each do |lib|
   $LOCAL_LIBS << "#{lib} "
 end
 
-GIT_REPOSITORY = 'https://github.com/Victorcorcos/equations-parser.git'.freeze
-COMMIT = '6332141daff98324c611346a32defd551c73616e'.freeze
+GIT_REPOSITORY = 'https://github.com/oxeanbits/equations-parser.git'.freeze
+COMMIT = 'PREENCHER'.freeze
 
 Dir.chdir(BASEDIR) do
   system('git init')

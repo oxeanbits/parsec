@@ -38,7 +38,7 @@ libs.each do |lib|
 end
 
 GIT_REPOSITORY = 'https://github.com/oxeanbits/equations-parser.git'.freeze
-COMMIT = '39ba4c44c14df83b8dd5ea98e69d1607f9b07f6f'.freeze
+COMMIT = '7428a00a7e56f14afc9178de599e331bae71d17b'.freeze
 
 Dir.chdir(BASEDIR) do
   system('git init')
@@ -74,10 +74,13 @@ Dir.chdir(BASEDIR) do
   Dir.chdir('ext/libnativemath/') do
     system('make')
 
-    next if RUBY_PLATFORM.match? 'darwin'
-
+    # Copy extension file to lib directory for all platforms
     if RUBY_VERSION >= '3.2'
-      FileUtils.cp('libnativemath.so', '../../lib/')
+      if RUBY_PLATFORM.match? 'darwin'
+        FileUtils.cp('libnativemath.bundle', '../../lib/libnativemath.bundle')
+      else
+        FileUtils.cp('libnativemath.so', '../../lib/')
+      end
     end
   end
 end

@@ -391,4 +391,35 @@ class TestParsec < Minitest::Test
     assert_equal('One Two Three', parsec.eval_equation('calculate("\"One\" // \" \" // \"Two\" // \" \" // \"Three\"")'))
     assert_equal('3', parsec.eval_equation('calculate("number(calculate(\"1 + 1\")) + 1")'))
   end
+
+  def test_weekday
+    parsec = Parsec::Parsec
+    assert_equal(0, parsec.eval_equation('weekday("2021-03-21")'))
+    assert_equal(1, parsec.eval_equation('weekday("2016-03-21")'))
+    assert_equal(2, parsec.eval_equation('weekday("2017-03-21")'))
+    assert_equal(3, parsec.eval_equation('weekday("2018-03-21")'))
+    assert_equal(4, parsec.eval_equation('weekday("2019-03-21")'))
+
+    assert_equal(5, parsec.eval_equation('weekday("2014-03-21T21:03")'))
+    assert_equal(6, parsec.eval_equation('weekday("2015-03-21T21:03")'))
+
+    assert_equal('Søndag', parsec.eval_equation('weekday("2021-03-21", "nb")'))
+    assert_equal('星期一', parsec.eval_equation('weekday("2016-03-21", "zh-CN")'))
+    assert_equal('Mardi', parsec.eval_equation('weekday("2017-03-21", "fr-FR")'))
+    assert_equal('วันพุธ', parsec.eval_equation('weekday("2018-03-21", "th-TH")'))
+    assert_equal('Quinta-feira', parsec.eval_equation('weekday("2019-03-21", "pt-BR")'))
+
+    assert_raises(SyntaxError) { parsec.eval_equation('weekday("2019-03-21", "invalidlocale")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('weekday("2024-32-21")') }
+    assert_raises(SyntaxError) { parsec.eval_equation('weekday("2024-09-17", "en", "one too many params")') }
+  end
+
+  def test_current_time
+    parsec = Parsec::Parsec
+    assert_raises(SyntaxError) { parsec.eval_equation('current_time("1"))') }
+    assert_match(/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/, parsec.eval_equation('current_time(5)'))
+    assert_match(/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/, parsec.eval_equation('current_time()'))
+    assert_match(/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/, parsec.eval_equation('current_time(-3)'))
+    assert_match(/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/, parsec.eval_equation('current_time(-200)'))
+  end
 end

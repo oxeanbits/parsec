@@ -38,6 +38,19 @@ class TestParsec < Minitest::Test
     assert_equal(4.56, parser.eval_equation('round_decimal(4.559, 2)'))
   end
 
+  def test_round_with_optional_direction
+    parser = Parsec::Parsec
+
+    assert_equal(10, parser.eval_equation('round(10.1)'))
+    assert_equal(11, parser.eval_equation('round(10.1, "up")'))
+    assert_equal(10, parser.eval_equation('round(10.9, "down")'))
+    assert_equal(-10, parser.eval_equation('round(-10.9, "up")'))
+    assert_equal(-11, parser.eval_equation('round(-10.1, "down")'))
+
+    assert_raises(SyntaxError) { parser.eval_equation('round(10.5, "invalid")') }
+    assert_raises(SyntaxError) { parser.eval_equation('round(10.5, "up", "extra")') }
+  end
+
   def test_if_then_else_equations
     parser = Parsec::Parsec
     assert_equal('bigger', parser.eval_equation('4 > 2 ? "bigger" : "smaller"'))

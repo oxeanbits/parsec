@@ -38,7 +38,7 @@ libs.each do |lib|
 end
 
 GIT_REPOSITORY = 'https://github.com/oxeanbits/equations-parser.git'.freeze
-COMMIT = '7428a00a7e56f14afc9178de599e331bae71d17b'.freeze
+COMMIT = 'ec64e60b8cd11299c2237b13630801f79a1954c1'.freeze
 
 Dir.chdir(BASEDIR) do
   system('git init')

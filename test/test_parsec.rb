@@ -46,6 +46,9 @@ class TestParsec < Minitest::Test
     assert_equal(10, parser.eval_equation('round(10.9, "down")'))
     assert_equal(-10, parser.eval_equation('round(-10.9, "up")'))
     assert_equal(-11, parser.eval_equation('round(-10.1, "down")'))
+    
+    assert_equal(10, assert_equal(4.63, parsec.eval_equation('round_decimal(4.621, 2, "up")')))
+    assert_equal(11, assert_equal(4.62, parsec.eval_equation('round_decimal(4.629, 2, "down")')))
 
     assert_raises(SyntaxError) { parser.eval_equation('round(10.5, "invalid")') }
     assert_raises(SyntaxError) { parser.eval_equation('round(10.5, "up", "extra")') }
